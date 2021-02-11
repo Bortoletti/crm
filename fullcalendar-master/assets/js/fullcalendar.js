@@ -4741,6 +4741,7 @@ function View(element, calendar, viewName) {
 		var eventId = event._id;
 		console.log('eventDrop-id: ' + event.id );
 		console.log('eventDrop-Titulo: ' + event.title );
+		console.log('eventDrop-Inicio: ' + event.start );
 		moveEvents(eventsByID[eventId], dayDelta, minuteDelta, allDay);
 		trigger(
 			'eventDrop',
@@ -4757,6 +4758,9 @@ function View(element, calendar, viewName) {
 			ev,
 			ui
 		);
+		console.log('eventDrop-dayDelta: ' + dayDelta );
+		console.log('eventDrop-minuteDelta: ' + minuteDelta );
+		console.log('eventDrop-POST: post( {"id":"'+eventId+'","dias":"'+dayDelta+'"} )'  );
 		reportEventChange(eventId);
 	}
 	
