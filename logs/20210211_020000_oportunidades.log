@@ -1,0 +1,1197 @@
+# 11/02/2021 02:14:12; select nome from usuario where id_usuario = 11  
+# 11/02/2021 02:14:12; {"nome":"MARCELO VEIGA"} 
+# 11/02/2021 02:14:12; 
+SELECT id_etapa, nome
+, id_proxima, fl_ativo
+, id_etapa_2, nm_reduzido, 
+       cor_ativo, bs_cor
+, ( select count(1) 
+    from crm_oportunidade d 
+      where d.id_usuario = 11
+        and d.id_etapa = e.id_etapa
+          and d.id_crm_tipo_perda is null ) as linhas       
+  FROM crm_etapa e
+  order by id_etapa_2 
+# 11/02/2021 02:14:13; {"id":"1","nome":"TRIAGEM","cor":"bg-warning","linhas":"0"} 
+# 11/02/2021 02:14:13; {"id":"2","nome":"ENTENDER A NECESSIDADE DO CLIENTE","cor":"bg-primary","linhas":"2"} 
+# 11/02/2021 02:14:13; {"id":"3","nome":"TOP SERVICE DE PRODUTO E CONCEITO","cor":"bg-info","linhas":"0"} 
+# 11/02/2021 02:14:13; {"id":"4","nome":"PROJETO E PLANTA BAIXA","cor":"bg-success","linhas":"0"} 
+# 11/02/2021 02:14:13; {"id":"5","nome":"CONTATO COM O PRODUTO","cor":"bg-secondary","linhas":"0"} 
+# 11/02/2021 02:14:13; {"id":"6","nome":"ORCAMENTO","cor":"bg-warning","linhas":"0"} 
+# 11/02/2021 02:14:13; {"id":"7","nome":"NEGOCIACAO","cor":"bg-danger","linhas":"1"} 
+# 11/02/2021 02:14:13; {"id":"8","nome":"FECHAMENTO","cor":"bg-success","linhas":"11"} 
+# 11/02/2021 02:14:13; select count(1) as linhas
+from crm_oportunidade
+where id_usuario = 11 
+  and id_crm_tipo_perda is null  
+# 11/02/2021 02:14:13; select nome ||' ' as nome, id_oportunidade
+      , replace( replace( descricao, '<',''), '>','') as descricao
+      , email, fone
+       from crm_oportunidade
+       where id_usuario = 11 
+         and id_etapa = 1 
+           and id_crm_tipo_perda is null
+         limit 10 
+# 11/02/2021 02:14:14; select nome ||' ' as nome, id_oportunidade
+      , replace( replace( descricao, '<',''), '>','') as descricao
+      , email, fone
+       from crm_oportunidade
+       where id_usuario = 11 
+         and id_etapa = 2 
+           and id_crm_tipo_perda is null
+         limit 10 
+# 11/02/2021 02:14:14; Ler Oportunidade:{"id":"5928","nome":"FELIPE FORJAZ ","descricao":"CELULAR: (11) 9847-23888BR /MENSAGEM: HTTPS://YOUTU.BE/U53RAC8WYCK?LIST=UUT9F1MRTUBQVQCDJR5BFEHQ
+
+OLA BOA NOITE. GOSTARIA DE TE RUMA IDEIA DE PREÇO E SABE SE VCS TEM SHOWROOM EM SP. 
+ESSE SOFÁ QUE ESTÁ NO VIDEO COM ESSA DIMENSÃO  DA PRIMEIRA FILEIRA
+GRATO
+FELIPEBR / PÁGINA: CONTATO","email":"felipe@helloo.com.br","fone":"11984723888"} 
+# 11/02/2021 02:14:14; Ler Oportunidade:{"id":"6146","nome":"MARCOS HENRIQUE ","descricao":"CLIENTE FEZ CONTATO VIA WHATSAPP, INTERESSE LINHA HOME","email":"","fone":"(11) 94775.9022"} 
+# 11/02/2021 02:14:14; select u.nome
+            , i.historico
+            , i.ts_inclusao, to_char( i.ts_inclusao, 'dd/mm/yyyy hh24:mi:ss') as ts_inclusao_fmt
+            , i.dt_inclusao, to_char( i.dt_inclusao, 'dd/mm/yyyy') as dt_inclusao_fmt
+            , i.id_oportunidade_hist
+        from usuario u, crm_oportunidade_hist i
+            where i.id_oportunidade = 
+            and u.id_usuario = i.id_usuario
+            order by i.id_oportunidade_hist desc
+            limit 1 
+# 11/02/2021 02:14:14; Error: SQLSTATE[42601]: Syntax error: 7 ERROR:  syntax error at or near "and"
+LINE 8:             and u.id_usuario = i.id_usuario
+                    ^ 
+# 11/02/2021 02:14:14; select u.nome
+            , i.historico
+            , i.ts_inclusao, to_char( i.ts_inclusao, 'dd/mm/yyyy hh24:mi:ss') as ts_inclusao_fmt
+            , i.dt_inclusao, to_char( i.dt_inclusao, 'dd/mm/yyyy') as dt_inclusao_fmt
+            , i.id_oportunidade_hist
+        from usuario u, crm_oportunidade_hist i
+            where i.id_oportunidade = 6146
+            and u.id_usuario = i.id_usuario
+            order by i.id_oportunidade_hist desc
+            limit 1 
+# 11/02/2021 02:14:15; select nome ||' ' as nome, id_oportunidade
+      , replace( replace( descricao, '<',''), '>','') as descricao
+      , email, fone
+       from crm_oportunidade
+       where id_usuario = 11 
+         and id_etapa = 3 
+           and id_crm_tipo_perda is null
+         limit 10 
+# 11/02/2021 02:14:15; select nome ||' ' as nome, id_oportunidade
+      , replace( replace( descricao, '<',''), '>','') as descricao
+      , email, fone
+       from crm_oportunidade
+       where id_usuario = 11 
+         and id_etapa = 4 
+           and id_crm_tipo_perda is null
+         limit 10 
+# 11/02/2021 02:14:15; select nome ||' ' as nome, id_oportunidade
+      , replace( replace( descricao, '<',''), '>','') as descricao
+      , email, fone
+       from crm_oportunidade
+       where id_usuario = 11 
+         and id_etapa = 5 
+           and id_crm_tipo_perda is null
+         limit 10 
+# 11/02/2021 02:14:16; select nome ||' ' as nome, id_oportunidade
+      , replace( replace( descricao, '<',''), '>','') as descricao
+      , email, fone
+       from crm_oportunidade
+       where id_usuario = 11 
+         and id_etapa = 6 
+           and id_crm_tipo_perda is null
+         limit 10 
+# 11/02/2021 02:14:16; select nome ||' ' as nome, id_oportunidade
+      , replace( replace( descricao, '<',''), '>','') as descricao
+      , email, fone
+       from crm_oportunidade
+       where id_usuario = 11 
+         and id_etapa = 7 
+           and id_crm_tipo_perda is null
+         limit 10 
+# 11/02/2021 02:14:16; Ler Oportunidade:{"id":"1208","nome":"RODRIGO CARVALHO LEMOS ","descricao":"0800 - 29/10/2018","email":"carvalho.lemos@uol.com.br ","fone":"11 - 98218 0100"} 
+# 11/02/2021 02:14:16; select u.nome
+            , i.historico
+            , i.ts_inclusao, to_char( i.ts_inclusao, 'dd/mm/yyyy hh24:mi:ss') as ts_inclusao_fmt
+            , i.dt_inclusao, to_char( i.dt_inclusao, 'dd/mm/yyyy') as dt_inclusao_fmt
+            , i.id_oportunidade_hist
+        from usuario u, crm_oportunidade_hist i
+            where i.id_oportunidade = 1208
+            and u.id_usuario = i.id_usuario
+            order by i.id_oportunidade_hist desc
+            limit 1 
+# 11/02/2021 02:14:17; select nome ||' ' as nome, id_oportunidade
+      , replace( replace( descricao, '<',''), '>','') as descricao
+      , email, fone
+       from crm_oportunidade
+       where id_usuario = 11 
+         and id_etapa = 8 
+           and id_crm_tipo_perda is null
+         limit 10 
+# 11/02/2021 02:14:17; Ler Oportunidade:{"id":"4579","nome":"LUCIANO CURY ","descricao":"ELEADS - 11/05/2020","email":"LUCIANOCURY@MAC.COM","fone":"11 - 98170 9000 "} 
+# 11/02/2021 02:14:17; Ler Oportunidade:{"id":"3247","nome":"FLAVIO MATTOS  ","descricao":"ELEADS - 26/09/2019","email":"Flaviokms@gmail.com","fone":"11 - 98415 4315 "} 
+# 11/02/2021 02:14:17; Ler Oportunidade:{"id":"3129","nome":"ALBERTO MAIER ","descricao":"ELEADS - 06/09/2019","email":"aamaier@yahoo.com","fone":"11 - 99445 1909 "} 
+# 11/02/2021 02:14:17; Ler Oportunidade:{"id":"1835","nome":"RICARDO ","descricao":"INDICACAO ESTUDIO HOME CAMPINAS - 25/02/2019","email":"","fone":"19 99773 2205"} 
+# 11/02/2021 02:14:17; Ler Oportunidade:{"id":"5548","nome":"FABIO VANCETTO ","descricao":"0800 - 20/10/2020","email":"","fone":"011 - 98116 7273"} 
+# 11/02/2021 02:14:17; Ler Oportunidade:{"id":"2542","nome":"LEONARDO BERTOLAZZI ","descricao":"0800 - 13/06/2019","email":"","fone":"11 - 99155 5937"} 
+# 11/02/2021 02:14:17; Ler Oportunidade:{"id":"1918","nome":"PAULO MENDES ","descricao":"ELEADS - 09/03/2019","email":"Pscmendes@gmail.com","fone":"11 - 99449 5651 "} 
+# 11/02/2021 02:14:17; Ler Oportunidade:{"id":"1133","nome":"SAMANTA COSTA  ","descricao":"INDICAÇÃO CASA &amp; SOM - 12/09/2018","email":"samantasilva.costa@gmail.com","fone":"11 - 96188 1200 "} 
+# 11/02/2021 02:14:17; Ler Oportunidade:{"id":"146","nome":"MICHEL  ","descricao":"INDICAÇÃO DA CUSTOM (LOJA TATUAPE) - 28/06/2018","email":"","fone":"11 96593 7336 "} 
+# 11/02/2021 02:14:17; Ler Oportunidade:{"id":"1290","nome":"AEDI CORDEIRO ","descricao":"INDICACAO ESTÚDIO HOME CAMPINAS - 09/11/2018","email":"aedi@jja.com.br ","fone":"19 99602 8679"} 
+# 11/02/2021 02:14:17; select u.nome
+            , i.historico
+            , i.ts_inclusao, to_char( i.ts_inclusao, 'dd/mm/yyyy hh24:mi:ss') as ts_inclusao_fmt
+            , i.dt_inclusao, to_char( i.dt_inclusao, 'dd/mm/yyyy') as dt_inclusao_fmt
+            , i.id_oportunidade_hist
+        from usuario u, crm_oportunidade_hist i
+            where i.id_oportunidade = 4579
+            and u.id_usuario = i.id_usuario
+            order by i.id_oportunidade_hist desc
+            limit 1 
+# 11/02/2021 02:14:18; select u.nome
+            , i.historico
+            , i.ts_inclusao, to_char( i.ts_inclusao, 'dd/mm/yyyy hh24:mi:ss') as ts_inclusao_fmt
+            , i.dt_inclusao, to_char( i.dt_inclusao, 'dd/mm/yyyy') as dt_inclusao_fmt
+            , i.id_oportunidade_hist
+        from usuario u, crm_oportunidade_hist i
+            where i.id_oportunidade = 3247
+            and u.id_usuario = i.id_usuario
+            order by i.id_oportunidade_hist desc
+            limit 1 
+# 11/02/2021 02:14:18; select u.nome
+            , i.historico
+            , i.ts_inclusao, to_char( i.ts_inclusao, 'dd/mm/yyyy hh24:mi:ss') as ts_inclusao_fmt
+            , i.dt_inclusao, to_char( i.dt_inclusao, 'dd/mm/yyyy') as dt_inclusao_fmt
+            , i.id_oportunidade_hist
+        from usuario u, crm_oportunidade_hist i
+            where i.id_oportunidade = 3129
+            and u.id_usuario = i.id_usuario
+            order by i.id_oportunidade_hist desc
+            limit 1 
+# 11/02/2021 02:14:18; select u.nome
+            , i.historico
+            , i.ts_inclusao, to_char( i.ts_inclusao, 'dd/mm/yyyy hh24:mi:ss') as ts_inclusao_fmt
+            , i.dt_inclusao, to_char( i.dt_inclusao, 'dd/mm/yyyy') as dt_inclusao_fmt
+            , i.id_oportunidade_hist
+        from usuario u, crm_oportunidade_hist i
+            where i.id_oportunidade = 1835
+            and u.id_usuario = i.id_usuario
+            order by i.id_oportunidade_hist desc
+            limit 1 
+# 11/02/2021 02:14:19; select u.nome
+            , i.historico
+            , i.ts_inclusao, to_char( i.ts_inclusao, 'dd/mm/yyyy hh24:mi:ss') as ts_inclusao_fmt
+            , i.dt_inclusao, to_char( i.dt_inclusao, 'dd/mm/yyyy') as dt_inclusao_fmt
+            , i.id_oportunidade_hist
+        from usuario u, crm_oportunidade_hist i
+            where i.id_oportunidade = 5548
+            and u.id_usuario = i.id_usuario
+            order by i.id_oportunidade_hist desc
+            limit 1 
+# 11/02/2021 02:14:19; select u.nome
+            , i.historico
+            , i.ts_inclusao, to_char( i.ts_inclusao, 'dd/mm/yyyy hh24:mi:ss') as ts_inclusao_fmt
+            , i.dt_inclusao, to_char( i.dt_inclusao, 'dd/mm/yyyy') as dt_inclusao_fmt
+            , i.id_oportunidade_hist
+        from usuario u, crm_oportunidade_hist i
+            where i.id_oportunidade = 2542
+            and u.id_usuario = i.id_usuario
+            order by i.id_oportunidade_hist desc
+            limit 1 
+# 11/02/2021 02:14:20; select u.nome
+            , i.historico
+            , i.ts_inclusao, to_char( i.ts_inclusao, 'dd/mm/yyyy hh24:mi:ss') as ts_inclusao_fmt
+            , i.dt_inclusao, to_char( i.dt_inclusao, 'dd/mm/yyyy') as dt_inclusao_fmt
+            , i.id_oportunidade_hist
+        from usuario u, crm_oportunidade_hist i
+            where i.id_oportunidade = 1918
+            and u.id_usuario = i.id_usuario
+            order by i.id_oportunidade_hist desc
+            limit 1 
+# 11/02/2021 02:14:20; select u.nome
+            , i.historico
+            , i.ts_inclusao, to_char( i.ts_inclusao, 'dd/mm/yyyy hh24:mi:ss') as ts_inclusao_fmt
+            , i.dt_inclusao, to_char( i.dt_inclusao, 'dd/mm/yyyy') as dt_inclusao_fmt
+            , i.id_oportunidade_hist
+        from usuario u, crm_oportunidade_hist i
+            where i.id_oportunidade = 1133
+            and u.id_usuario = i.id_usuario
+            order by i.id_oportunidade_hist desc
+            limit 1 
+# 11/02/2021 02:14:20; select u.nome
+            , i.historico
+            , i.ts_inclusao, to_char( i.ts_inclusao, 'dd/mm/yyyy hh24:mi:ss') as ts_inclusao_fmt
+            , i.dt_inclusao, to_char( i.dt_inclusao, 'dd/mm/yyyy') as dt_inclusao_fmt
+            , i.id_oportunidade_hist
+        from usuario u, crm_oportunidade_hist i
+            where i.id_oportunidade = 146
+            and u.id_usuario = i.id_usuario
+            order by i.id_oportunidade_hist desc
+            limit 1 
+# 11/02/2021 02:14:21; select u.nome
+            , i.historico
+            , i.ts_inclusao, to_char( i.ts_inclusao, 'dd/mm/yyyy hh24:mi:ss') as ts_inclusao_fmt
+            , i.dt_inclusao, to_char( i.dt_inclusao, 'dd/mm/yyyy') as dt_inclusao_fmt
+            , i.id_oportunidade_hist
+        from usuario u, crm_oportunidade_hist i
+            where i.id_oportunidade = 1290
+            and u.id_usuario = i.id_usuario
+            order by i.id_oportunidade_hist desc
+            limit 1 
+# 11/02/2021 02:18:33; select nome from usuario where id_usuario = 11  
+# 11/02/2021 02:18:33; {"nome":"MARCELO VEIGA"} 
+# 11/02/2021 02:18:33; 
+SELECT id_etapa, nome
+, id_proxima, fl_ativo
+, id_etapa_2, nm_reduzido, 
+       cor_ativo, bs_cor
+, ( select count(1) 
+    from crm_oportunidade d 
+      where d.id_usuario = 11
+        and d.id_etapa = e.id_etapa
+          and d.id_crm_tipo_perda is null ) as linhas       
+  FROM crm_etapa e
+  order by id_etapa_2 
+# 11/02/2021 02:18:33; {"id":"1","nome":"TRIAGEM","cor":"bg-warning","linhas":"0"} 
+# 11/02/2021 02:18:33; {"id":"2","nome":"ENTENDER A NECESSIDADE DO CLIENTE","cor":"bg-primary","linhas":"2"} 
+# 11/02/2021 02:18:33; {"id":"3","nome":"TOP SERVICE DE PRODUTO E CONCEITO","cor":"bg-info","linhas":"0"} 
+# 11/02/2021 02:18:33; {"id":"4","nome":"PROJETO E PLANTA BAIXA","cor":"bg-success","linhas":"0"} 
+# 11/02/2021 02:18:33; {"id":"5","nome":"CONTATO COM O PRODUTO","cor":"bg-secondary","linhas":"0"} 
+# 11/02/2021 02:18:33; {"id":"6","nome":"ORCAMENTO","cor":"bg-warning","linhas":"0"} 
+# 11/02/2021 02:18:33; {"id":"7","nome":"NEGOCIACAO","cor":"bg-danger","linhas":"1"} 
+# 11/02/2021 02:18:33; {"id":"8","nome":"FECHAMENTO","cor":"bg-success","linhas":"11"} 
+# 11/02/2021 02:18:33; select count(1) as linhas
+from crm_oportunidade
+where id_usuario = 11 
+  and id_crm_tipo_perda is null  
+# 11/02/2021 02:18:34; select nome ||' ' as nome, id_oportunidade
+      , replace( replace( descricao, '<',''), '>','') as descricao
+      , email, fone
+       from crm_oportunidade
+       where id_usuario = 11 
+         and id_etapa = 1 
+           and id_crm_tipo_perda is null
+         limit 10 
+# 11/02/2021 02:18:35; select nome ||' ' as nome, id_oportunidade
+      , replace( replace( descricao, '<',''), '>','') as descricao
+      , email, fone
+       from crm_oportunidade
+       where id_usuario = 11 
+         and id_etapa = 2 
+           and id_crm_tipo_perda is null
+         limit 10 
+# 11/02/2021 02:18:35; Ler Oportunidade:{"id":"5928","nome":"FELIPE FORJAZ ","descricao":"CELULAR: (11) 9847-23888BR /MENSAGEM: HTTPS://YOUTU.BE/U53RAC8WYCK?LIST=UUT9F1MRTUBQVQCDJR5BFEHQ
+
+OLA BOA NOITE. GOSTARIA DE TE RUMA IDEIA DE PRE&Ccedil;O E SABE SE VCS TEM SHOWROOM EM SP. 
+ESSE SOF&Aacute; QUE EST&Aacute; NO VIDEO COM ESSA DIMENS&Atilde;O  DA PRIMEIRA FILEIRA
+GRATO
+FELIPEBR / P&Aacute;GINA: CONTATO","email":"felipe@helloo.com.br","fone":"11984723888"} 
+# 11/02/2021 02:18:35; Ler Oportunidade:{"id":"6146","nome":"MARCOS HENRIQUE ","descricao":"CLIENTE FEZ CONTATO VIA WHATSAPP, INTERESSE LINHA HOME","email":"","fone":"(11) 94775.9022"} 
+# 11/02/2021 02:18:35; select u.nome
+            , i.historico
+            , i.ts_inclusao, to_char( i.ts_inclusao, 'dd/mm/yyyy hh24:mi:ss') as ts_inclusao_fmt
+            , i.dt_inclusao, to_char( i.dt_inclusao, 'dd/mm/yyyy') as dt_inclusao_fmt
+            , i.id_oportunidade_hist
+        from usuario u, crm_oportunidade_hist i
+            where i.id_oportunidade = 
+            and u.id_usuario = i.id_usuario
+            order by i.id_oportunidade_hist desc
+            limit 1 
+# 11/02/2021 02:18:35; Error: SQLSTATE[42601]: Syntax error: 7 ERROR:  syntax error at or near "and"
+LINE 8:             and u.id_usuario = i.id_usuario
+                    ^ 
+# 11/02/2021 02:18:35; select u.nome
+            , i.historico
+            , i.ts_inclusao, to_char( i.ts_inclusao, 'dd/mm/yyyy hh24:mi:ss') as ts_inclusao_fmt
+            , i.dt_inclusao, to_char( i.dt_inclusao, 'dd/mm/yyyy') as dt_inclusao_fmt
+            , i.id_oportunidade_hist
+        from usuario u, crm_oportunidade_hist i
+            where i.id_oportunidade = 6146
+            and u.id_usuario = i.id_usuario
+            order by i.id_oportunidade_hist desc
+            limit 1 
+# 11/02/2021 02:18:36; select nome ||' ' as nome, id_oportunidade
+      , replace( replace( descricao, '<',''), '>','') as descricao
+      , email, fone
+       from crm_oportunidade
+       where id_usuario = 11 
+         and id_etapa = 3 
+           and id_crm_tipo_perda is null
+         limit 10 
+# 11/02/2021 02:18:36; select nome ||' ' as nome, id_oportunidade
+      , replace( replace( descricao, '<',''), '>','') as descricao
+      , email, fone
+       from crm_oportunidade
+       where id_usuario = 11 
+         and id_etapa = 4 
+           and id_crm_tipo_perda is null
+         limit 10 
+# 11/02/2021 02:18:36; select nome ||' ' as nome, id_oportunidade
+      , replace( replace( descricao, '<',''), '>','') as descricao
+      , email, fone
+       from crm_oportunidade
+       where id_usuario = 11 
+         and id_etapa = 5 
+           and id_crm_tipo_perda is null
+         limit 10 
+# 11/02/2021 02:18:37; select nome ||' ' as nome, id_oportunidade
+      , replace( replace( descricao, '<',''), '>','') as descricao
+      , email, fone
+       from crm_oportunidade
+       where id_usuario = 11 
+         and id_etapa = 6 
+           and id_crm_tipo_perda is null
+         limit 10 
+# 11/02/2021 02:18:37; select nome ||' ' as nome, id_oportunidade
+      , replace( replace( descricao, '<',''), '>','') as descricao
+      , email, fone
+       from crm_oportunidade
+       where id_usuario = 11 
+         and id_etapa = 7 
+           and id_crm_tipo_perda is null
+         limit 10 
+# 11/02/2021 02:18:37; Ler Oportunidade:{"id":"1208","nome":"RODRIGO CARVALHO LEMOS ","descricao":"0800 - 29/10/2018","email":"carvalho.lemos@uol.com.br ","fone":"11 - 98218 0100"} 
+# 11/02/2021 02:18:37; select u.nome
+            , i.historico
+            , i.ts_inclusao, to_char( i.ts_inclusao, 'dd/mm/yyyy hh24:mi:ss') as ts_inclusao_fmt
+            , i.dt_inclusao, to_char( i.dt_inclusao, 'dd/mm/yyyy') as dt_inclusao_fmt
+            , i.id_oportunidade_hist
+        from usuario u, crm_oportunidade_hist i
+            where i.id_oportunidade = 1208
+            and u.id_usuario = i.id_usuario
+            order by i.id_oportunidade_hist desc
+            limit 1 
+# 11/02/2021 02:18:38; select nome ||' ' as nome, id_oportunidade
+      , replace( replace( descricao, '<',''), '>','') as descricao
+      , email, fone
+       from crm_oportunidade
+       where id_usuario = 11 
+         and id_etapa = 8 
+           and id_crm_tipo_perda is null
+         limit 10 
+# 11/02/2021 02:18:38; Ler Oportunidade:{"id":"4579","nome":"LUCIANO CURY ","descricao":"ELEADS - 11/05/2020","email":"LUCIANOCURY@MAC.COM","fone":"11 - 98170 9000 "} 
+# 11/02/2021 02:18:38; Ler Oportunidade:{"id":"3247","nome":"FLAVIO MATTOS  ","descricao":"ELEADS - 26/09/2019","email":"Flaviokms@gmail.com","fone":"11 - 98415 4315 "} 
+# 11/02/2021 02:18:38; Ler Oportunidade:{"id":"3129","nome":"ALBERTO MAIER ","descricao":"ELEADS - 06/09/2019","email":"aamaier@yahoo.com","fone":"11 - 99445 1909 "} 
+# 11/02/2021 02:18:38; Ler Oportunidade:{"id":"1835","nome":"RICARDO ","descricao":"INDICACAO ESTUDIO HOME CAMPINAS - 25/02/2019","email":"","fone":"19 99773 2205"} 
+# 11/02/2021 02:18:38; Ler Oportunidade:{"id":"5548","nome":"FABIO VANCETTO ","descricao":"0800 - 20/10/2020","email":"","fone":"011 - 98116 7273"} 
+# 11/02/2021 02:18:38; Ler Oportunidade:{"id":"2542","nome":"LEONARDO BERTOLAZZI ","descricao":"0800 - 13/06/2019","email":"","fone":"11 - 99155 5937"} 
+# 11/02/2021 02:18:38; Ler Oportunidade:{"id":"1918","nome":"PAULO MENDES ","descricao":"ELEADS - 09/03/2019","email":"Pscmendes@gmail.com","fone":"11 - 99449 5651 "} 
+# 11/02/2021 02:18:38; Ler Oportunidade:{"id":"1133","nome":"SAMANTA COSTA  ","descricao":"INDICA&Ccedil;&Atilde;O CASA &amp;amp; SOM - 12/09/2018","email":"samantasilva.costa@gmail.com","fone":"11 - 96188 1200 "} 
+# 11/02/2021 02:18:38; Ler Oportunidade:{"id":"146","nome":"MICHEL  ","descricao":"INDICA&Ccedil;&Atilde;O DA CUSTOM (LOJA TATUAPE) - 28/06/2018","email":"","fone":"11 96593 7336 "} 
+# 11/02/2021 02:18:38; Ler Oportunidade:{"id":"1290","nome":"AEDI CORDEIRO ","descricao":"INDICACAO EST&Uacute;DIO HOME CAMPINAS - 09/11/2018","email":"aedi@jja.com.br ","fone":"19 99602 8679"} 
+# 11/02/2021 02:18:38; select u.nome
+            , i.historico
+            , i.ts_inclusao, to_char( i.ts_inclusao, 'dd/mm/yyyy hh24:mi:ss') as ts_inclusao_fmt
+            , i.dt_inclusao, to_char( i.dt_inclusao, 'dd/mm/yyyy') as dt_inclusao_fmt
+            , i.id_oportunidade_hist
+        from usuario u, crm_oportunidade_hist i
+            where i.id_oportunidade = 4579
+            and u.id_usuario = i.id_usuario
+            order by i.id_oportunidade_hist desc
+            limit 1 
+# 11/02/2021 02:18:39; select u.nome
+            , i.historico
+            , i.ts_inclusao, to_char( i.ts_inclusao, 'dd/mm/yyyy hh24:mi:ss') as ts_inclusao_fmt
+            , i.dt_inclusao, to_char( i.dt_inclusao, 'dd/mm/yyyy') as dt_inclusao_fmt
+            , i.id_oportunidade_hist
+        from usuario u, crm_oportunidade_hist i
+            where i.id_oportunidade = 3247
+            and u.id_usuario = i.id_usuario
+            order by i.id_oportunidade_hist desc
+            limit 1 
+# 11/02/2021 02:18:39; select u.nome
+            , i.historico
+            , i.ts_inclusao, to_char( i.ts_inclusao, 'dd/mm/yyyy hh24:mi:ss') as ts_inclusao_fmt
+            , i.dt_inclusao, to_char( i.dt_inclusao, 'dd/mm/yyyy') as dt_inclusao_fmt
+            , i.id_oportunidade_hist
+        from usuario u, crm_oportunidade_hist i
+            where i.id_oportunidade = 3129
+            and u.id_usuario = i.id_usuario
+            order by i.id_oportunidade_hist desc
+            limit 1 
+# 11/02/2021 02:18:39; select u.nome
+            , i.historico
+            , i.ts_inclusao, to_char( i.ts_inclusao, 'dd/mm/yyyy hh24:mi:ss') as ts_inclusao_fmt
+            , i.dt_inclusao, to_char( i.dt_inclusao, 'dd/mm/yyyy') as dt_inclusao_fmt
+            , i.id_oportunidade_hist
+        from usuario u, crm_oportunidade_hist i
+            where i.id_oportunidade = 1835
+            and u.id_usuario = i.id_usuario
+            order by i.id_oportunidade_hist desc
+            limit 1 
+# 11/02/2021 02:18:40; select u.nome
+            , i.historico
+            , i.ts_inclusao, to_char( i.ts_inclusao, 'dd/mm/yyyy hh24:mi:ss') as ts_inclusao_fmt
+            , i.dt_inclusao, to_char( i.dt_inclusao, 'dd/mm/yyyy') as dt_inclusao_fmt
+            , i.id_oportunidade_hist
+        from usuario u, crm_oportunidade_hist i
+            where i.id_oportunidade = 5548
+            and u.id_usuario = i.id_usuario
+            order by i.id_oportunidade_hist desc
+            limit 1 
+# 11/02/2021 02:18:40; select u.nome
+            , i.historico
+            , i.ts_inclusao, to_char( i.ts_inclusao, 'dd/mm/yyyy hh24:mi:ss') as ts_inclusao_fmt
+            , i.dt_inclusao, to_char( i.dt_inclusao, 'dd/mm/yyyy') as dt_inclusao_fmt
+            , i.id_oportunidade_hist
+        from usuario u, crm_oportunidade_hist i
+            where i.id_oportunidade = 2542
+            and u.id_usuario = i.id_usuario
+            order by i.id_oportunidade_hist desc
+            limit 1 
+# 11/02/2021 02:18:41; select u.nome
+            , i.historico
+            , i.ts_inclusao, to_char( i.ts_inclusao, 'dd/mm/yyyy hh24:mi:ss') as ts_inclusao_fmt
+            , i.dt_inclusao, to_char( i.dt_inclusao, 'dd/mm/yyyy') as dt_inclusao_fmt
+            , i.id_oportunidade_hist
+        from usuario u, crm_oportunidade_hist i
+            where i.id_oportunidade = 1918
+            and u.id_usuario = i.id_usuario
+            order by i.id_oportunidade_hist desc
+            limit 1 
+# 11/02/2021 02:18:41; select u.nome
+            , i.historico
+            , i.ts_inclusao, to_char( i.ts_inclusao, 'dd/mm/yyyy hh24:mi:ss') as ts_inclusao_fmt
+            , i.dt_inclusao, to_char( i.dt_inclusao, 'dd/mm/yyyy') as dt_inclusao_fmt
+            , i.id_oportunidade_hist
+        from usuario u, crm_oportunidade_hist i
+            where i.id_oportunidade = 1133
+            and u.id_usuario = i.id_usuario
+            order by i.id_oportunidade_hist desc
+            limit 1 
+# 11/02/2021 02:18:41; select u.nome
+            , i.historico
+            , i.ts_inclusao, to_char( i.ts_inclusao, 'dd/mm/yyyy hh24:mi:ss') as ts_inclusao_fmt
+            , i.dt_inclusao, to_char( i.dt_inclusao, 'dd/mm/yyyy') as dt_inclusao_fmt
+            , i.id_oportunidade_hist
+        from usuario u, crm_oportunidade_hist i
+            where i.id_oportunidade = 146
+            and u.id_usuario = i.id_usuario
+            order by i.id_oportunidade_hist desc
+            limit 1 
+# 11/02/2021 02:18:42; select u.nome
+            , i.historico
+            , i.ts_inclusao, to_char( i.ts_inclusao, 'dd/mm/yyyy hh24:mi:ss') as ts_inclusao_fmt
+            , i.dt_inclusao, to_char( i.dt_inclusao, 'dd/mm/yyyy') as dt_inclusao_fmt
+            , i.id_oportunidade_hist
+        from usuario u, crm_oportunidade_hist i
+            where i.id_oportunidade = 1290
+            and u.id_usuario = i.id_usuario
+            order by i.id_oportunidade_hist desc
+            limit 1 
+# 11/02/2021 02:21:30; select nome from usuario where id_usuario = 11  
+# 11/02/2021 02:21:31; {"nome":"MARCELO VEIGA"} 
+# 11/02/2021 02:21:31; 
+SELECT id_etapa, nome
+, id_proxima, fl_ativo
+, id_etapa_2, nm_reduzido, 
+       cor_ativo, bs_cor
+, ( select count(1) 
+    from crm_oportunidade d 
+      where d.id_usuario = 11
+        and d.id_etapa = e.id_etapa
+          and d.id_crm_tipo_perda is null ) as linhas       
+  FROM crm_etapa e
+  order by id_etapa_2 
+# 11/02/2021 02:21:31; {"id":"1","nome":"TRIAGEM","cor":"bg-warning","linhas":"0"} 
+# 11/02/2021 02:21:31; {"id":"2","nome":"ENTENDER A NECESSIDADE DO CLIENTE","cor":"bg-primary","linhas":"2"} 
+# 11/02/2021 02:21:31; {"id":"3","nome":"TOP SERVICE DE PRODUTO E CONCEITO","cor":"bg-info","linhas":"0"} 
+# 11/02/2021 02:21:31; {"id":"4","nome":"PROJETO E PLANTA BAIXA","cor":"bg-success","linhas":"0"} 
+# 11/02/2021 02:21:31; {"id":"5","nome":"CONTATO COM O PRODUTO","cor":"bg-secondary","linhas":"0"} 
+# 11/02/2021 02:21:31; {"id":"6","nome":"ORCAMENTO","cor":"bg-warning","linhas":"0"} 
+# 11/02/2021 02:21:31; {"id":"7","nome":"NEGOCIACAO","cor":"bg-danger","linhas":"1"} 
+# 11/02/2021 02:21:31; {"id":"8","nome":"FECHAMENTO","cor":"bg-success","linhas":"11"} 
+# 11/02/2021 02:21:31; select count(1) as linhas
+from crm_oportunidade
+where id_usuario = 11 
+  and id_crm_tipo_perda is null  
+# 11/02/2021 02:21:32; select nome ||' ' as nome, id_oportunidade
+      , replace( replace( descricao, '<',''), '>','') as descricao
+      , email, fone
+       from crm_oportunidade
+       where id_usuario = 11 
+         and id_etapa = 1 
+           and id_crm_tipo_perda is null
+         limit 10 
+# 11/02/2021 02:21:32; select nome ||' ' as nome, id_oportunidade
+      , replace( replace( descricao, '<',''), '>','') as descricao
+      , email, fone
+       from crm_oportunidade
+       where id_usuario = 11 
+         and id_etapa = 2 
+           and id_crm_tipo_perda is null
+         limit 10 
+# 11/02/2021 02:21:32; Ler Oportunidade:{"id":"5928","nome":"FELIPE FORJAZ ","descricao":"CELULAR: (11) 9847-23888BR /MENSAGEM: HTTPS://YOUTU.BE/U53RAC8WYCK?LIST=UUT9F1MRTUBQVQCDJR5BFEHQ
+
+OLA BOA NOITE. GOSTARIA DE TE RUMA IDEIA DE PREÇO E SABE SE VCS TEM SHOWROOM EM SP. 
+ESSE SOFÁ QUE ESTÁ NO VIDEO COM ESSA DIMENSÃO  DA PRIMEIRA FILEIRA
+GRATO
+FELIPEBR / PÁGINA: CONTATO","email":"felipe@helloo.com.br","fone":"11984723888"} 
+# 11/02/2021 02:21:32; Ler Oportunidade:{"id":"6146","nome":"MARCOS HENRIQUE ","descricao":"CLIENTE FEZ CONTATO VIA WHATSAPP, INTERESSE LINHA HOME","email":"","fone":"(11) 94775.9022"} 
+# 11/02/2021 02:21:32; select u.nome
+            , i.historico
+            , i.ts_inclusao, to_char( i.ts_inclusao, 'dd/mm/yyyy hh24:mi:ss') as ts_inclusao_fmt
+            , i.dt_inclusao, to_char( i.dt_inclusao, 'dd/mm/yyyy') as dt_inclusao_fmt
+            , i.id_oportunidade_hist
+        from usuario u, crm_oportunidade_hist i
+            where i.id_oportunidade = 
+            and u.id_usuario = i.id_usuario
+            order by i.id_oportunidade_hist desc
+            limit 1 
+# 11/02/2021 02:21:33; Error: SQLSTATE[42601]: Syntax error: 7 ERROR:  syntax error at or near "and"
+LINE 8:             and u.id_usuario = i.id_usuario
+                    ^ 
+# 11/02/2021 02:21:33; select u.nome
+            , i.historico
+            , i.ts_inclusao, to_char( i.ts_inclusao, 'dd/mm/yyyy hh24:mi:ss') as ts_inclusao_fmt
+            , i.dt_inclusao, to_char( i.dt_inclusao, 'dd/mm/yyyy') as dt_inclusao_fmt
+            , i.id_oportunidade_hist
+        from usuario u, crm_oportunidade_hist i
+            where i.id_oportunidade = 6146
+            and u.id_usuario = i.id_usuario
+            order by i.id_oportunidade_hist desc
+            limit 1 
+# 11/02/2021 02:21:33; select nome ||' ' as nome, id_oportunidade
+      , replace( replace( descricao, '<',''), '>','') as descricao
+      , email, fone
+       from crm_oportunidade
+       where id_usuario = 11 
+         and id_etapa = 3 
+           and id_crm_tipo_perda is null
+         limit 10 
+# 11/02/2021 02:21:33; select nome ||' ' as nome, id_oportunidade
+      , replace( replace( descricao, '<',''), '>','') as descricao
+      , email, fone
+       from crm_oportunidade
+       where id_usuario = 11 
+         and id_etapa = 4 
+           and id_crm_tipo_perda is null
+         limit 10 
+# 11/02/2021 02:21:34; select nome ||' ' as nome, id_oportunidade
+      , replace( replace( descricao, '<',''), '>','') as descricao
+      , email, fone
+       from crm_oportunidade
+       where id_usuario = 11 
+         and id_etapa = 5 
+           and id_crm_tipo_perda is null
+         limit 10 
+# 11/02/2021 02:21:34; select nome ||' ' as nome, id_oportunidade
+      , replace( replace( descricao, '<',''), '>','') as descricao
+      , email, fone
+       from crm_oportunidade
+       where id_usuario = 11 
+         and id_etapa = 6 
+           and id_crm_tipo_perda is null
+         limit 10 
+# 11/02/2021 02:21:35; select nome ||' ' as nome, id_oportunidade
+      , replace( replace( descricao, '<',''), '>','') as descricao
+      , email, fone
+       from crm_oportunidade
+       where id_usuario = 11 
+         and id_etapa = 7 
+           and id_crm_tipo_perda is null
+         limit 10 
+# 11/02/2021 02:21:35; Ler Oportunidade:{"id":"1208","nome":"RODRIGO CARVALHO LEMOS ","descricao":"0800 - 29/10/2018","email":"carvalho.lemos@uol.com.br ","fone":"11 - 98218 0100"} 
+# 11/02/2021 02:21:35; select u.nome
+            , i.historico
+            , i.ts_inclusao, to_char( i.ts_inclusao, 'dd/mm/yyyy hh24:mi:ss') as ts_inclusao_fmt
+            , i.dt_inclusao, to_char( i.dt_inclusao, 'dd/mm/yyyy') as dt_inclusao_fmt
+            , i.id_oportunidade_hist
+        from usuario u, crm_oportunidade_hist i
+            where i.id_oportunidade = 1208
+            and u.id_usuario = i.id_usuario
+            order by i.id_oportunidade_hist desc
+            limit 1 
+# 11/02/2021 02:21:35; select nome ||' ' as nome, id_oportunidade
+      , replace( replace( descricao, '<',''), '>','') as descricao
+      , email, fone
+       from crm_oportunidade
+       where id_usuario = 11 
+         and id_etapa = 8 
+           and id_crm_tipo_perda is null
+         limit 10 
+# 11/02/2021 02:21:36; Ler Oportunidade:{"id":"4579","nome":"LUCIANO CURY ","descricao":"ELEADS - 11/05/2020","email":"LUCIANOCURY@MAC.COM","fone":"11 - 98170 9000 "} 
+# 11/02/2021 02:21:36; Ler Oportunidade:{"id":"3247","nome":"FLAVIO MATTOS  ","descricao":"ELEADS - 26/09/2019","email":"Flaviokms@gmail.com","fone":"11 - 98415 4315 "} 
+# 11/02/2021 02:21:36; Ler Oportunidade:{"id":"3129","nome":"ALBERTO MAIER ","descricao":"ELEADS - 06/09/2019","email":"aamaier@yahoo.com","fone":"11 - 99445 1909 "} 
+# 11/02/2021 02:21:36; Ler Oportunidade:{"id":"1835","nome":"RICARDO ","descricao":"INDICACAO ESTUDIO HOME CAMPINAS - 25/02/2019","email":"","fone":"19 99773 2205"} 
+# 11/02/2021 02:21:36; Ler Oportunidade:{"id":"5548","nome":"FABIO VANCETTO ","descricao":"0800 - 20/10/2020","email":"","fone":"011 - 98116 7273"} 
+# 11/02/2021 02:21:36; Ler Oportunidade:{"id":"2542","nome":"LEONARDO BERTOLAZZI ","descricao":"0800 - 13/06/2019","email":"","fone":"11 - 99155 5937"} 
+# 11/02/2021 02:21:36; Ler Oportunidade:{"id":"1918","nome":"PAULO MENDES ","descricao":"ELEADS - 09/03/2019","email":"Pscmendes@gmail.com","fone":"11 - 99449 5651 "} 
+# 11/02/2021 02:21:36; Ler Oportunidade:{"id":"1133","nome":"SAMANTA COSTA  ","descricao":"INDICAÇÃO CASA &amp;amp; SOM - 12/09/2018","email":"samantasilva.costa@gmail.com","fone":"11 - 96188 1200 "} 
+# 11/02/2021 02:21:36; Ler Oportunidade:{"id":"146","nome":"MICHEL  ","descricao":"INDICAÇÃO DA CUSTOM (LOJA TATUAPE) - 28/06/2018","email":"","fone":"11 96593 7336 "} 
+# 11/02/2021 02:21:36; Ler Oportunidade:{"id":"1290","nome":"AEDI CORDEIRO ","descricao":"INDICACAO ESTÚDIO HOME CAMPINAS - 09/11/2018","email":"aedi@jja.com.br ","fone":"19 99602 8679"} 
+# 11/02/2021 02:21:36; select u.nome
+            , i.historico
+            , i.ts_inclusao, to_char( i.ts_inclusao, 'dd/mm/yyyy hh24:mi:ss') as ts_inclusao_fmt
+            , i.dt_inclusao, to_char( i.dt_inclusao, 'dd/mm/yyyy') as dt_inclusao_fmt
+            , i.id_oportunidade_hist
+        from usuario u, crm_oportunidade_hist i
+            where i.id_oportunidade = 4579
+            and u.id_usuario = i.id_usuario
+            order by i.id_oportunidade_hist desc
+            limit 1 
+# 11/02/2021 02:21:36; select u.nome
+            , i.historico
+            , i.ts_inclusao, to_char( i.ts_inclusao, 'dd/mm/yyyy hh24:mi:ss') as ts_inclusao_fmt
+            , i.dt_inclusao, to_char( i.dt_inclusao, 'dd/mm/yyyy') as dt_inclusao_fmt
+            , i.id_oportunidade_hist
+        from usuario u, crm_oportunidade_hist i
+            where i.id_oportunidade = 3247
+            and u.id_usuario = i.id_usuario
+            order by i.id_oportunidade_hist desc
+            limit 1 
+# 11/02/2021 02:21:36; select u.nome
+            , i.historico
+            , i.ts_inclusao, to_char( i.ts_inclusao, 'dd/mm/yyyy hh24:mi:ss') as ts_inclusao_fmt
+            , i.dt_inclusao, to_char( i.dt_inclusao, 'dd/mm/yyyy') as dt_inclusao_fmt
+            , i.id_oportunidade_hist
+        from usuario u, crm_oportunidade_hist i
+            where i.id_oportunidade = 3129
+            and u.id_usuario = i.id_usuario
+            order by i.id_oportunidade_hist desc
+            limit 1 
+# 11/02/2021 02:21:37; select u.nome
+            , i.historico
+            , i.ts_inclusao, to_char( i.ts_inclusao, 'dd/mm/yyyy hh24:mi:ss') as ts_inclusao_fmt
+            , i.dt_inclusao, to_char( i.dt_inclusao, 'dd/mm/yyyy') as dt_inclusao_fmt
+            , i.id_oportunidade_hist
+        from usuario u, crm_oportunidade_hist i
+            where i.id_oportunidade = 1835
+            and u.id_usuario = i.id_usuario
+            order by i.id_oportunidade_hist desc
+            limit 1 
+# 11/02/2021 02:21:37; select u.nome
+            , i.historico
+            , i.ts_inclusao, to_char( i.ts_inclusao, 'dd/mm/yyyy hh24:mi:ss') as ts_inclusao_fmt
+            , i.dt_inclusao, to_char( i.dt_inclusao, 'dd/mm/yyyy') as dt_inclusao_fmt
+            , i.id_oportunidade_hist
+        from usuario u, crm_oportunidade_hist i
+            where i.id_oportunidade = 5548
+            and u.id_usuario = i.id_usuario
+            order by i.id_oportunidade_hist desc
+            limit 1 
+# 11/02/2021 02:21:38; select u.nome
+            , i.historico
+            , i.ts_inclusao, to_char( i.ts_inclusao, 'dd/mm/yyyy hh24:mi:ss') as ts_inclusao_fmt
+            , i.dt_inclusao, to_char( i.dt_inclusao, 'dd/mm/yyyy') as dt_inclusao_fmt
+            , i.id_oportunidade_hist
+        from usuario u, crm_oportunidade_hist i
+            where i.id_oportunidade = 2542
+            and u.id_usuario = i.id_usuario
+            order by i.id_oportunidade_hist desc
+            limit 1 
+# 11/02/2021 02:21:38; select u.nome
+            , i.historico
+            , i.ts_inclusao, to_char( i.ts_inclusao, 'dd/mm/yyyy hh24:mi:ss') as ts_inclusao_fmt
+            , i.dt_inclusao, to_char( i.dt_inclusao, 'dd/mm/yyyy') as dt_inclusao_fmt
+            , i.id_oportunidade_hist
+        from usuario u, crm_oportunidade_hist i
+            where i.id_oportunidade = 1918
+            and u.id_usuario = i.id_usuario
+            order by i.id_oportunidade_hist desc
+            limit 1 
+# 11/02/2021 02:21:38; select u.nome
+            , i.historico
+            , i.ts_inclusao, to_char( i.ts_inclusao, 'dd/mm/yyyy hh24:mi:ss') as ts_inclusao_fmt
+            , i.dt_inclusao, to_char( i.dt_inclusao, 'dd/mm/yyyy') as dt_inclusao_fmt
+            , i.id_oportunidade_hist
+        from usuario u, crm_oportunidade_hist i
+            where i.id_oportunidade = 1133
+            and u.id_usuario = i.id_usuario
+            order by i.id_oportunidade_hist desc
+            limit 1 
+# 11/02/2021 02:21:39; select u.nome
+            , i.historico
+            , i.ts_inclusao, to_char( i.ts_inclusao, 'dd/mm/yyyy hh24:mi:ss') as ts_inclusao_fmt
+            , i.dt_inclusao, to_char( i.dt_inclusao, 'dd/mm/yyyy') as dt_inclusao_fmt
+            , i.id_oportunidade_hist
+        from usuario u, crm_oportunidade_hist i
+            where i.id_oportunidade = 146
+            and u.id_usuario = i.id_usuario
+            order by i.id_oportunidade_hist desc
+            limit 1 
+# 11/02/2021 02:21:39; select u.nome
+            , i.historico
+            , i.ts_inclusao, to_char( i.ts_inclusao, 'dd/mm/yyyy hh24:mi:ss') as ts_inclusao_fmt
+            , i.dt_inclusao, to_char( i.dt_inclusao, 'dd/mm/yyyy') as dt_inclusao_fmt
+            , i.id_oportunidade_hist
+        from usuario u, crm_oportunidade_hist i
+            where i.id_oportunidade = 1290
+            and u.id_usuario = i.id_usuario
+            order by i.id_oportunidade_hist desc
+            limit 1 
+# 11/02/2021 02:23:32; select nome from usuario where id_usuario = 11  
+# 11/02/2021 02:23:32; {"nome":"MARCELO VEIGA"} 
+# 11/02/2021 02:23:32; 
+SELECT id_etapa, nome
+, id_proxima, fl_ativo
+, id_etapa_2, nm_reduzido, 
+       cor_ativo, bs_cor
+, ( select count(1) 
+    from crm_oportunidade d 
+      where d.id_usuario = 11
+        and d.id_etapa = e.id_etapa
+          and d.id_crm_tipo_perda is null ) as linhas       
+  FROM crm_etapa e
+  order by id_etapa_2 
+# 11/02/2021 02:23:32; {"id":"1","nome":"TRIAGEM","cor":"bg-warning","linhas":"0"} 
+# 11/02/2021 02:23:32; {"id":"2","nome":"ENTENDER A NECESSIDADE DO CLIENTE","cor":"bg-primary","linhas":"2"} 
+# 11/02/2021 02:23:32; {"id":"3","nome":"TOP SERVICE DE PRODUTO E CONCEITO","cor":"bg-info","linhas":"0"} 
+# 11/02/2021 02:23:32; {"id":"4","nome":"PROJETO E PLANTA BAIXA","cor":"bg-success","linhas":"0"} 
+# 11/02/2021 02:23:32; {"id":"5","nome":"CONTATO COM O PRODUTO","cor":"bg-secondary","linhas":"0"} 
+# 11/02/2021 02:23:32; {"id":"6","nome":"ORCAMENTO","cor":"bg-warning","linhas":"0"} 
+# 11/02/2021 02:23:32; {"id":"7","nome":"NEGOCIACAO","cor":"bg-danger","linhas":"1"} 
+# 11/02/2021 02:23:32; {"id":"8","nome":"FECHAMENTO","cor":"bg-success","linhas":"11"} 
+# 11/02/2021 02:23:32; select count(1) as linhas
+from crm_oportunidade
+where id_usuario = 11 
+  and id_crm_tipo_perda is null  
+# 11/02/2021 02:23:33; select nome ||' ' as nome, id_oportunidade
+      , replace( replace( descricao, '<',''), '>','') as descricao
+      , email, fone
+       from crm_oportunidade
+       where id_usuario = 11 
+         and id_etapa = 1 
+           and id_crm_tipo_perda is null
+         limit 10 
+# 11/02/2021 02:23:33; select nome ||' ' as nome, id_oportunidade
+      , replace( replace( descricao, '<',''), '>','') as descricao
+      , email, fone
+       from crm_oportunidade
+       where id_usuario = 11 
+         and id_etapa = 2 
+           and id_crm_tipo_perda is null
+         limit 10 
+# 11/02/2021 02:23:34; Ler Oportunidade:{"id":"5928","nome":"FELIPE FORJAZ ","descricao":"CELULAR:(11)9847-23888BR/MENSAGEM:HTTPS://YOUTU.BE/U53RAC8WYCK?LIST=UUT9F1MRTUBQVQCDJR5BFEHQ
+
+OLABOANOITE.GOSTARIADETERUMAIDEIADEPREÇOESABESEVCSTEMSHOWROOMEMSP.
+ESSESOFÁQUEESTÁNOVIDEOCOMESSADIMENSÃODAPRIMEIRAFILEIRA
+GRATO
+FELIPEBR/PÁGINA:CONTATO","email":"felipe@helloo.com.br","fone":"11984723888"} 
+# 11/02/2021 02:23:34; Ler Oportunidade:{"id":"6146","nome":"MARCOS HENRIQUE ","descricao":"CLIENTEFEZCONTATOVIAWHATSAPP,INTERESSELINHAHOME","email":"","fone":"(11) 94775.9022"} 
+# 11/02/2021 02:23:34; select u.nome
+            , i.historico
+            , i.ts_inclusao, to_char( i.ts_inclusao, 'dd/mm/yyyy hh24:mi:ss') as ts_inclusao_fmt
+            , i.dt_inclusao, to_char( i.dt_inclusao, 'dd/mm/yyyy') as dt_inclusao_fmt
+            , i.id_oportunidade_hist
+        from usuario u, crm_oportunidade_hist i
+            where i.id_oportunidade = 
+            and u.id_usuario = i.id_usuario
+            order by i.id_oportunidade_hist desc
+            limit 1 
+# 11/02/2021 02:23:34; Error: SQLSTATE[42601]: Syntax error: 7 ERROR:  syntax error at or near "and"
+LINE 8:             and u.id_usuario = i.id_usuario
+                    ^ 
+# 11/02/2021 02:23:34; select u.nome
+            , i.historico
+            , i.ts_inclusao, to_char( i.ts_inclusao, 'dd/mm/yyyy hh24:mi:ss') as ts_inclusao_fmt
+            , i.dt_inclusao, to_char( i.dt_inclusao, 'dd/mm/yyyy') as dt_inclusao_fmt
+            , i.id_oportunidade_hist
+        from usuario u, crm_oportunidade_hist i
+            where i.id_oportunidade = 6146
+            and u.id_usuario = i.id_usuario
+            order by i.id_oportunidade_hist desc
+            limit 1 
+# 11/02/2021 02:23:34; select nome ||' ' as nome, id_oportunidade
+      , replace( replace( descricao, '<',''), '>','') as descricao
+      , email, fone
+       from crm_oportunidade
+       where id_usuario = 11 
+         and id_etapa = 3 
+           and id_crm_tipo_perda is null
+         limit 10 
+# 11/02/2021 02:23:35; select nome ||' ' as nome, id_oportunidade
+      , replace( replace( descricao, '<',''), '>','') as descricao
+      , email, fone
+       from crm_oportunidade
+       where id_usuario = 11 
+         and id_etapa = 4 
+           and id_crm_tipo_perda is null
+         limit 10 
+# 11/02/2021 02:23:35; select nome ||' ' as nome, id_oportunidade
+      , replace( replace( descricao, '<',''), '>','') as descricao
+      , email, fone
+       from crm_oportunidade
+       where id_usuario = 11 
+         and id_etapa = 5 
+           and id_crm_tipo_perda is null
+         limit 10 
+# 11/02/2021 02:23:36; select nome ||' ' as nome, id_oportunidade
+      , replace( replace( descricao, '<',''), '>','') as descricao
+      , email, fone
+       from crm_oportunidade
+       where id_usuario = 11 
+         and id_etapa = 6 
+           and id_crm_tipo_perda is null
+         limit 10 
+# 11/02/2021 02:23:36; select nome ||' ' as nome, id_oportunidade
+      , replace( replace( descricao, '<',''), '>','') as descricao
+      , email, fone
+       from crm_oportunidade
+       where id_usuario = 11 
+         and id_etapa = 7 
+           and id_crm_tipo_perda is null
+         limit 10 
+# 11/02/2021 02:23:36; Ler Oportunidade:{"id":"1208","nome":"RODRIGO CARVALHO LEMOS ","descricao":"0800-29/10/2018","email":"carvalho.lemos@uol.com.br ","fone":"11 - 98218 0100"} 
+# 11/02/2021 02:23:36; select u.nome
+            , i.historico
+            , i.ts_inclusao, to_char( i.ts_inclusao, 'dd/mm/yyyy hh24:mi:ss') as ts_inclusao_fmt
+            , i.dt_inclusao, to_char( i.dt_inclusao, 'dd/mm/yyyy') as dt_inclusao_fmt
+            , i.id_oportunidade_hist
+        from usuario u, crm_oportunidade_hist i
+            where i.id_oportunidade = 1208
+            and u.id_usuario = i.id_usuario
+            order by i.id_oportunidade_hist desc
+            limit 1 
+# 11/02/2021 02:23:37; select nome ||' ' as nome, id_oportunidade
+      , replace( replace( descricao, '<',''), '>','') as descricao
+      , email, fone
+       from crm_oportunidade
+       where id_usuario = 11 
+         and id_etapa = 8 
+           and id_crm_tipo_perda is null
+         limit 10 
+# 11/02/2021 02:23:37; Ler Oportunidade:{"id":"4579","nome":"LUCIANO CURY ","descricao":"ELEADS-11/05/2020","email":"LUCIANOCURY@MAC.COM","fone":"11 - 98170 9000 "} 
+# 11/02/2021 02:23:37; Ler Oportunidade:{"id":"3247","nome":"FLAVIO MATTOS  ","descricao":"ELEADS-26/09/2019","email":"Flaviokms@gmail.com","fone":"11 - 98415 4315 "} 
+# 11/02/2021 02:23:37; Ler Oportunidade:{"id":"3129","nome":"ALBERTO MAIER ","descricao":"ELEADS-06/09/2019","email":"aamaier@yahoo.com","fone":"11 - 99445 1909 "} 
+# 11/02/2021 02:23:37; Ler Oportunidade:{"id":"1835","nome":"RICARDO ","descricao":"INDICACAOESTUDIOHOMECAMPINAS-25/02/2019","email":"","fone":"19 99773 2205"} 
+# 11/02/2021 02:23:37; Ler Oportunidade:{"id":"5548","nome":"FABIO VANCETTO ","descricao":"0800-20/10/2020","email":"","fone":"011 - 98116 7273"} 
+# 11/02/2021 02:23:37; Ler Oportunidade:{"id":"2542","nome":"LEONARDO BERTOLAZZI ","descricao":"0800-13/06/2019","email":"","fone":"11 - 99155 5937"} 
+# 11/02/2021 02:23:37; Ler Oportunidade:{"id":"1918","nome":"PAULO MENDES ","descricao":"ELEADS-09/03/2019","email":"Pscmendes@gmail.com","fone":"11 - 99449 5651 "} 
+# 11/02/2021 02:23:37; Ler Oportunidade:{"id":"1133","nome":"SAMANTA COSTA  ","descricao":"INDICAÇÃOCASA&amp;SOM-12/09/2018","email":"samantasilva.costa@gmail.com","fone":"11 - 96188 1200 "} 
+# 11/02/2021 02:23:37; Ler Oportunidade:{"id":"146","nome":"MICHEL  ","descricao":"INDICAÇÃODACUSTOM(LOJATATUAPE)-28/06/2018","email":"","fone":"11 96593 7336 "} 
+# 11/02/2021 02:23:37; Ler Oportunidade:{"id":"1290","nome":"AEDI CORDEIRO ","descricao":"INDICACAOESTÚDIOHOMECAMPINAS-09/11/2018","email":"aedi@jja.com.br ","fone":"19 99602 8679"} 
+# 11/02/2021 02:23:37; select u.nome
+            , i.historico
+            , i.ts_inclusao, to_char( i.ts_inclusao, 'dd/mm/yyyy hh24:mi:ss') as ts_inclusao_fmt
+            , i.dt_inclusao, to_char( i.dt_inclusao, 'dd/mm/yyyy') as dt_inclusao_fmt
+            , i.id_oportunidade_hist
+        from usuario u, crm_oportunidade_hist i
+            where i.id_oportunidade = 4579
+            and u.id_usuario = i.id_usuario
+            order by i.id_oportunidade_hist desc
+            limit 1 
+# 11/02/2021 02:23:37; select u.nome
+            , i.historico
+            , i.ts_inclusao, to_char( i.ts_inclusao, 'dd/mm/yyyy hh24:mi:ss') as ts_inclusao_fmt
+            , i.dt_inclusao, to_char( i.dt_inclusao, 'dd/mm/yyyy') as dt_inclusao_fmt
+            , i.id_oportunidade_hist
+        from usuario u, crm_oportunidade_hist i
+            where i.id_oportunidade = 3247
+            and u.id_usuario = i.id_usuario
+            order by i.id_oportunidade_hist desc
+            limit 1 
+# 11/02/2021 02:23:38; select u.nome
+            , i.historico
+            , i.ts_inclusao, to_char( i.ts_inclusao, 'dd/mm/yyyy hh24:mi:ss') as ts_inclusao_fmt
+            , i.dt_inclusao, to_char( i.dt_inclusao, 'dd/mm/yyyy') as dt_inclusao_fmt
+            , i.id_oportunidade_hist
+        from usuario u, crm_oportunidade_hist i
+            where i.id_oportunidade = 3129
+            and u.id_usuario = i.id_usuario
+            order by i.id_oportunidade_hist desc
+            limit 1 
+# 11/02/2021 02:23:38; select u.nome
+            , i.historico
+            , i.ts_inclusao, to_char( i.ts_inclusao, 'dd/mm/yyyy hh24:mi:ss') as ts_inclusao_fmt
+            , i.dt_inclusao, to_char( i.dt_inclusao, 'dd/mm/yyyy') as dt_inclusao_fmt
+            , i.id_oportunidade_hist
+        from usuario u, crm_oportunidade_hist i
+            where i.id_oportunidade = 1835
+            and u.id_usuario = i.id_usuario
+            order by i.id_oportunidade_hist desc
+            limit 1 
+# 11/02/2021 02:23:39; select u.nome
+            , i.historico
+            , i.ts_inclusao, to_char( i.ts_inclusao, 'dd/mm/yyyy hh24:mi:ss') as ts_inclusao_fmt
+            , i.dt_inclusao, to_char( i.dt_inclusao, 'dd/mm/yyyy') as dt_inclusao_fmt
+            , i.id_oportunidade_hist
+        from usuario u, crm_oportunidade_hist i
+            where i.id_oportunidade = 5548
+            and u.id_usuario = i.id_usuario
+            order by i.id_oportunidade_hist desc
+            limit 1 
+# 11/02/2021 02:23:39; select u.nome
+            , i.historico
+            , i.ts_inclusao, to_char( i.ts_inclusao, 'dd/mm/yyyy hh24:mi:ss') as ts_inclusao_fmt
+            , i.dt_inclusao, to_char( i.dt_inclusao, 'dd/mm/yyyy') as dt_inclusao_fmt
+            , i.id_oportunidade_hist
+        from usuario u, crm_oportunidade_hist i
+            where i.id_oportunidade = 2542
+            and u.id_usuario = i.id_usuario
+            order by i.id_oportunidade_hist desc
+            limit 1 
+# 11/02/2021 02:23:39; select u.nome
+            , i.historico
+            , i.ts_inclusao, to_char( i.ts_inclusao, 'dd/mm/yyyy hh24:mi:ss') as ts_inclusao_fmt
+            , i.dt_inclusao, to_char( i.dt_inclusao, 'dd/mm/yyyy') as dt_inclusao_fmt
+            , i.id_oportunidade_hist
+        from usuario u, crm_oportunidade_hist i
+            where i.id_oportunidade = 1918
+            and u.id_usuario = i.id_usuario
+            order by i.id_oportunidade_hist desc
+            limit 1 
+# 11/02/2021 02:23:40; select u.nome
+            , i.historico
+            , i.ts_inclusao, to_char( i.ts_inclusao, 'dd/mm/yyyy hh24:mi:ss') as ts_inclusao_fmt
+            , i.dt_inclusao, to_char( i.dt_inclusao, 'dd/mm/yyyy') as dt_inclusao_fmt
+            , i.id_oportunidade_hist
+        from usuario u, crm_oportunidade_hist i
+            where i.id_oportunidade = 1133
+            and u.id_usuario = i.id_usuario
+            order by i.id_oportunidade_hist desc
+            limit 1 
+# 11/02/2021 02:23:40; select u.nome
+            , i.historico
+            , i.ts_inclusao, to_char( i.ts_inclusao, 'dd/mm/yyyy hh24:mi:ss') as ts_inclusao_fmt
+            , i.dt_inclusao, to_char( i.dt_inclusao, 'dd/mm/yyyy') as dt_inclusao_fmt
+            , i.id_oportunidade_hist
+        from usuario u, crm_oportunidade_hist i
+            where i.id_oportunidade = 146
+            and u.id_usuario = i.id_usuario
+            order by i.id_oportunidade_hist desc
+            limit 1 
+# 11/02/2021 02:23:41; select u.nome
+            , i.historico
+            , i.ts_inclusao, to_char( i.ts_inclusao, 'dd/mm/yyyy hh24:mi:ss') as ts_inclusao_fmt
+            , i.dt_inclusao, to_char( i.dt_inclusao, 'dd/mm/yyyy') as dt_inclusao_fmt
+            , i.id_oportunidade_hist
+        from usuario u, crm_oportunidade_hist i
+            where i.id_oportunidade = 1290
+            and u.id_usuario = i.id_usuario
+            order by i.id_oportunidade_hist desc
+            limit 1 
+# 11/02/2021 02:25:48; select nome from usuario where id_usuario = 11  
+# 11/02/2021 02:25:48; {"nome":"MARCELO VEIGA"} 
+# 11/02/2021 02:25:48; 
+SELECT id_etapa, nome
+, id_proxima, fl_ativo
+, id_etapa_2, nm_reduzido, 
+       cor_ativo, bs_cor
+, ( select count(1) 
+    from crm_oportunidade d 
+      where d.id_usuario = 11
+        and d.id_etapa = e.id_etapa
+          and d.id_crm_tipo_perda is null ) as linhas       
+  FROM crm_etapa e
+  order by id_etapa_2 
+# 11/02/2021 02:25:49; {"id":"1","nome":"TRIAGEM","cor":"bg-warning","linhas":"0"} 
+# 11/02/2021 02:25:49; {"id":"2","nome":"ENTENDER A NECESSIDADE DO CLIENTE","cor":"bg-primary","linhas":"2"} 
+# 11/02/2021 02:25:49; {"id":"3","nome":"TOP SERVICE DE PRODUTO E CONCEITO","cor":"bg-info","linhas":"0"} 
+# 11/02/2021 02:25:49; {"id":"4","nome":"PROJETO E PLANTA BAIXA","cor":"bg-success","linhas":"0"} 
+# 11/02/2021 02:25:49; {"id":"5","nome":"CONTATO COM O PRODUTO","cor":"bg-secondary","linhas":"0"} 
+# 11/02/2021 02:25:49; {"id":"6","nome":"ORCAMENTO","cor":"bg-warning","linhas":"0"} 
+# 11/02/2021 02:25:49; {"id":"7","nome":"NEGOCIACAO","cor":"bg-danger","linhas":"1"} 
+# 11/02/2021 02:25:49; {"id":"8","nome":"FECHAMENTO","cor":"bg-success","linhas":"11"} 
+# 11/02/2021 02:25:49; select count(1) as linhas
+from crm_oportunidade
+where id_usuario = 11 
+  and id_crm_tipo_perda is null  
+# 11/02/2021 02:25:49; select nome ||' ' as nome, id_oportunidade
+      , replace( replace( descricao, '<',''), '>','') as descricao
+      , email, fone
+       from crm_oportunidade
+       where id_usuario = 11 
+         and id_etapa = 1 
+           and id_crm_tipo_perda is null
+         limit 10 
+# 11/02/2021 02:25:50; select nome ||' ' as nome, id_oportunidade
+      , replace( replace( descricao, '<',''), '>','') as descricao
+      , email, fone
+       from crm_oportunidade
+       where id_usuario = 11 
+         and id_etapa = 2 
+           and id_crm_tipo_perda is null
+         limit 10 
+# 11/02/2021 02:25:50; Ler Oportunidade:{"id":"5928","nome":"FELIPE FORJAZ ","descricao":"CELULAR: (11) 9847-23888BR /MENSAGEM: HTTPS://YOUTU.BE/U53RAC8WYCK?LIST=UUT9F1MRTUBQVQCDJR5BFEHQOLA BOA NOITE. GOSTARIA DE TE RUMA IDEIA DE PREÇO E SABE SE VCS TEM SHOWROOM EM SP. ESSE SOFÁ QUE ESTÁ NO VIDEO COM ESSA DIMENSÃO  DA PRIMEIRA FILEIRAGRATOFELIPEBR / PÁGINA: CONTATO","email":"felipe@helloo.com.br","fone":"11984723888"} 
+# 11/02/2021 02:25:50; Ler Oportunidade:{"id":"6146","nome":"MARCOS HENRIQUE ","descricao":"CLIENTE FEZ CONTATO VIA WHATSAPP, INTERESSE LINHA HOME","email":"","fone":"(11) 94775.9022"} 
+# 11/02/2021 02:25:50; select u.nome
+            , i.historico
+            , i.ts_inclusao, to_char( i.ts_inclusao, 'dd/mm/yyyy hh24:mi:ss') as ts_inclusao_fmt
+            , i.dt_inclusao, to_char( i.dt_inclusao, 'dd/mm/yyyy') as dt_inclusao_fmt
+            , i.id_oportunidade_hist
+        from usuario u, crm_oportunidade_hist i
+            where i.id_oportunidade = 5928
+            and u.id_usuario = i.id_usuario
+            order by i.id_oportunidade_hist desc
+            limit 1 
+# 11/02/2021 02:25:50; select u.nome
+            , i.historico
+            , i.ts_inclusao, to_char( i.ts_inclusao, 'dd/mm/yyyy hh24:mi:ss') as ts_inclusao_fmt
+            , i.dt_inclusao, to_char( i.dt_inclusao, 'dd/mm/yyyy') as dt_inclusao_fmt
+            , i.id_oportunidade_hist
+        from usuario u, crm_oportunidade_hist i
+            where i.id_oportunidade = 6146
+            and u.id_usuario = i.id_usuario
+            order by i.id_oportunidade_hist desc
+            limit 1 
+# 11/02/2021 02:25:51; select nome ||' ' as nome, id_oportunidade
+      , replace( replace( descricao, '<',''), '>','') as descricao
+      , email, fone
+       from crm_oportunidade
+       where id_usuario = 11 
+         and id_etapa = 3 
+           and id_crm_tipo_perda is null
+         limit 10 
+# 11/02/2021 02:25:51; select nome ||' ' as nome, id_oportunidade
+      , replace( replace( descricao, '<',''), '>','') as descricao
+      , email, fone
+       from crm_oportunidade
+       where id_usuario = 11 
+         and id_etapa = 4 
+           and id_crm_tipo_perda is null
+         limit 10 
+# 11/02/2021 02:25:52; select nome ||' ' as nome, id_oportunidade
+      , replace( replace( descricao, '<',''), '>','') as descricao
+      , email, fone
+       from crm_oportunidade
+       where id_usuario = 11 
+         and id_etapa = 5 
+           and id_crm_tipo_perda is null
+         limit 10 
+# 11/02/2021 02:25:52; select nome ||' ' as nome, id_oportunidade
+      , replace( replace( descricao, '<',''), '>','') as descricao
+      , email, fone
+       from crm_oportunidade
+       where id_usuario = 11 
+         and id_etapa = 6 
+           and id_crm_tipo_perda is null
+         limit 10 
+# 11/02/2021 02:25:52; select nome ||' ' as nome, id_oportunidade
+      , replace( replace( descricao, '<',''), '>','') as descricao
+      , email, fone
+       from crm_oportunidade
+       where id_usuario = 11 
+         and id_etapa = 7 
+           and id_crm_tipo_perda is null
+         limit 10 
+# 11/02/2021 02:25:53; Ler Oportunidade:{"id":"1208","nome":"RODRIGO CARVALHO LEMOS ","descricao":"0800 - 29/10/2018","email":"carvalho.lemos@uol.com.br ","fone":"11 - 98218 0100"} 
+# 11/02/2021 02:25:53; select u.nome
+            , i.historico
+            , i.ts_inclusao, to_char( i.ts_inclusao, 'dd/mm/yyyy hh24:mi:ss') as ts_inclusao_fmt
+            , i.dt_inclusao, to_char( i.dt_inclusao, 'dd/mm/yyyy') as dt_inclusao_fmt
+            , i.id_oportunidade_hist
+        from usuario u, crm_oportunidade_hist i
+            where i.id_oportunidade = 1208
+            and u.id_usuario = i.id_usuario
+            order by i.id_oportunidade_hist desc
+            limit 1 
+# 11/02/2021 02:25:53; select nome ||' ' as nome, id_oportunidade
+      , replace( replace( descricao, '<',''), '>','') as descricao
+      , email, fone
+       from crm_oportunidade
+       where id_usuario = 11 
+         and id_etapa = 8 
+           and id_crm_tipo_perda is null
+         limit 10 
+# 11/02/2021 02:25:54; Ler Oportunidade:{"id":"4579","nome":"LUCIANO CURY ","descricao":"ELEADS - 11/05/2020","email":"LUCIANOCURY@MAC.COM","fone":"11 - 98170 9000 "} 
+# 11/02/2021 02:25:54; Ler Oportunidade:{"id":"3247","nome":"FLAVIO MATTOS  ","descricao":"ELEADS - 26/09/2019","email":"Flaviokms@gmail.com","fone":"11 - 98415 4315 "} 
+# 11/02/2021 02:25:54; Ler Oportunidade:{"id":"3129","nome":"ALBERTO MAIER ","descricao":"ELEADS - 06/09/2019","email":"aamaier@yahoo.com","fone":"11 - 99445 1909 "} 
+# 11/02/2021 02:25:54; Ler Oportunidade:{"id":"1835","nome":"RICARDO ","descricao":"INDICACAO ESTUDIO HOME CAMPINAS - 25/02/2019","email":"","fone":"19 99773 2205"} 
+# 11/02/2021 02:25:54; Ler Oportunidade:{"id":"5548","nome":"FABIO VANCETTO ","descricao":"0800 - 20/10/2020","email":"","fone":"011 - 98116 7273"} 
+# 11/02/2021 02:25:54; Ler Oportunidade:{"id":"2542","nome":"LEONARDO BERTOLAZZI ","descricao":"0800 - 13/06/2019","email":"","fone":"11 - 99155 5937"} 
+# 11/02/2021 02:25:54; Ler Oportunidade:{"id":"1918","nome":"PAULO MENDES ","descricao":"ELEADS - 09/03/2019","email":"Pscmendes@gmail.com","fone":"11 - 99449 5651 "} 
+# 11/02/2021 02:25:54; Ler Oportunidade:{"id":"1133","nome":"SAMANTA COSTA  ","descricao":"INDICAÇÃO CASA &amp; SOM - 12/09/2018","email":"samantasilva.costa@gmail.com","fone":"11 - 96188 1200 "} 
+# 11/02/2021 02:25:54; Ler Oportunidade:{"id":"146","nome":"MICHEL  ","descricao":"INDICAÇÃO DA CUSTOM (LOJA TATUAPE) - 28/06/2018","email":"","fone":"11 96593 7336 "} 
+# 11/02/2021 02:25:54; Ler Oportunidade:{"id":"1290","nome":"AEDI CORDEIRO ","descricao":"INDICACAO ESTÚDIO HOME CAMPINAS - 09/11/2018","email":"aedi@jja.com.br ","fone":"19 99602 8679"} 
+# 11/02/2021 02:25:54; select u.nome
+            , i.historico
+            , i.ts_inclusao, to_char( i.ts_inclusao, 'dd/mm/yyyy hh24:mi:ss') as ts_inclusao_fmt
+            , i.dt_inclusao, to_char( i.dt_inclusao, 'dd/mm/yyyy') as dt_inclusao_fmt
+            , i.id_oportunidade_hist
+        from usuario u, crm_oportunidade_hist i
+            where i.id_oportunidade = 4579
+            and u.id_usuario = i.id_usuario
+            order by i.id_oportunidade_hist desc
+            limit 1 
+# 11/02/2021 02:25:54; select u.nome
+            , i.historico
+            , i.ts_inclusao, to_char( i.ts_inclusao, 'dd/mm/yyyy hh24:mi:ss') as ts_inclusao_fmt
+            , i.dt_inclusao, to_char( i.dt_inclusao, 'dd/mm/yyyy') as dt_inclusao_fmt
+            , i.id_oportunidade_hist
+        from usuario u, crm_oportunidade_hist i
+            where i.id_oportunidade = 3247
+            and u.id_usuario = i.id_usuario
+            order by i.id_oportunidade_hist desc
+            limit 1 
+# 11/02/2021 02:25:54; select u.nome
+            , i.historico
+            , i.ts_inclusao, to_char( i.ts_inclusao, 'dd/mm/yyyy hh24:mi:ss') as ts_inclusao_fmt
+            , i.dt_inclusao, to_char( i.dt_inclusao, 'dd/mm/yyyy') as dt_inclusao_fmt
+            , i.id_oportunidade_hist
+        from usuario u, crm_oportunidade_hist i
+            where i.id_oportunidade = 3129
+            and u.id_usuario = i.id_usuario
+            order by i.id_oportunidade_hist desc
+            limit 1 
+# 11/02/2021 02:25:55; select u.nome
+            , i.historico
+            , i.ts_inclusao, to_char( i.ts_inclusao, 'dd/mm/yyyy hh24:mi:ss') as ts_inclusao_fmt
+            , i.dt_inclusao, to_char( i.dt_inclusao, 'dd/mm/yyyy') as dt_inclusao_fmt
+            , i.id_oportunidade_hist
+        from usuario u, crm_oportunidade_hist i
+            where i.id_oportunidade = 1835
+            and u.id_usuario = i.id_usuario
+            order by i.id_oportunidade_hist desc
+            limit 1 
+# 11/02/2021 02:25:55; select u.nome
+            , i.historico
+            , i.ts_inclusao, to_char( i.ts_inclusao, 'dd/mm/yyyy hh24:mi:ss') as ts_inclusao_fmt
+            , i.dt_inclusao, to_char( i.dt_inclusao, 'dd/mm/yyyy') as dt_inclusao_fmt
+            , i.id_oportunidade_hist
+        from usuario u, crm_oportunidade_hist i
+            where i.id_oportunidade = 5548
+            and u.id_usuario = i.id_usuario
+            order by i.id_oportunidade_hist desc
+            limit 1 
+# 11/02/2021 02:25:55; select u.nome
+            , i.historico
+            , i.ts_inclusao, to_char( i.ts_inclusao, 'dd/mm/yyyy hh24:mi:ss') as ts_inclusao_fmt
+            , i.dt_inclusao, to_char( i.dt_inclusao, 'dd/mm/yyyy') as dt_inclusao_fmt
+            , i.id_oportunidade_hist
+        from usuario u, crm_oportunidade_hist i
+            where i.id_oportunidade = 2542
+            and u.id_usuario = i.id_usuario
+            order by i.id_oportunidade_hist desc
+            limit 1 
+# 11/02/2021 02:25:56; select u.nome
+            , i.historico
+            , i.ts_inclusao, to_char( i.ts_inclusao, 'dd/mm/yyyy hh24:mi:ss') as ts_inclusao_fmt
+            , i.dt_inclusao, to_char( i.dt_inclusao, 'dd/mm/yyyy') as dt_inclusao_fmt
+            , i.id_oportunidade_hist
+        from usuario u, crm_oportunidade_hist i
+            where i.id_oportunidade = 1918
+            and u.id_usuario = i.id_usuario
+            order by i.id_oportunidade_hist desc
+            limit 1 
+# 11/02/2021 02:25:56; select u.nome
+            , i.historico
+            , i.ts_inclusao, to_char( i.ts_inclusao, 'dd/mm/yyyy hh24:mi:ss') as ts_inclusao_fmt
+            , i.dt_inclusao, to_char( i.dt_inclusao, 'dd/mm/yyyy') as dt_inclusao_fmt
+            , i.id_oportunidade_hist
+        from usuario u, crm_oportunidade_hist i
+            where i.id_oportunidade = 1133
+            and u.id_usuario = i.id_usuario
+            order by i.id_oportunidade_hist desc
+            limit 1 
+# 11/02/2021 02:25:57; select u.nome
+            , i.historico
+            , i.ts_inclusao, to_char( i.ts_inclusao, 'dd/mm/yyyy hh24:mi:ss') as ts_inclusao_fmt
+            , i.dt_inclusao, to_char( i.dt_inclusao, 'dd/mm/yyyy') as dt_inclusao_fmt
+            , i.id_oportunidade_hist
+        from usuario u, crm_oportunidade_hist i
+            where i.id_oportunidade = 146
+            and u.id_usuario = i.id_usuario
+            order by i.id_oportunidade_hist desc
+            limit 1 
+# 11/02/2021 02:25:57; select u.nome
+            , i.historico
+            , i.ts_inclusao, to_char( i.ts_inclusao, 'dd/mm/yyyy hh24:mi:ss') as ts_inclusao_fmt
+            , i.dt_inclusao, to_char( i.dt_inclusao, 'dd/mm/yyyy') as dt_inclusao_fmt
+            , i.id_oportunidade_hist
+        from usuario u, crm_oportunidade_hist i
+            where i.id_oportunidade = 1290
+            and u.id_usuario = i.id_usuario
+            order by i.id_oportunidade_hist desc
+            limit 1 

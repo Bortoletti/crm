@@ -1,0 +1,33 @@
+# 09/02/2021 11:47:30; 
+SELECT id_etapa, nome
+, id_proxima, fl_ativo
+, id_etapa_2, nm_reduzido, 
+       cor_ativo
+  FROM crm_etapa
+  order by id_etapa_2 
+# 09/02/2021 11:47:30; {"nome":"TRIAGEM","cor":"#edd5e7"} 
+# 09/02/2021 11:47:30; {"nome":"ENTENDER A NECESSIDADE DO CLIENTE","cor":"#97bacf"} 
+# 09/02/2021 11:47:30; {"nome":"TOP SERVICE DE PRODUTO E CONCEITO","cor":"#11a1d6"} 
+# 09/02/2021 11:47:30; {"nome":"PROJETO E PLANTA BAIXA","cor":"#5da66a"} 
+# 09/02/2021 11:47:30; {"nome":"CONTATO COM O PRODUTO","cor":"#1f8f21"} 
+# 09/02/2021 11:47:30; {"nome":"ORCAMENTO","cor":"#e4e809"} 
+# 09/02/2021 11:47:30; {"nome":"NEGOCIACAO","cor":"#f7800a"} 
+# 09/02/2021 11:47:30; {"nome":"FECHAMENTO","cor":"#c91e1e"} 
+# 09/02/2021 11:47:30; ------------------------------   Fim   ------------------------------ 
+# 09/02/2021 11:48:37; 
+SELECT id_etapa, nome
+, id_proxima, fl_ativo
+, id_etapa_2, nm_reduzido, 
+       cor_ativo
+  FROM crm_etapa
+  order by id_etapa_2 
+# 09/02/2021 11:48:37; {"nome":"TRIAGEM","cor":"#edd5e7"} 
+# 09/02/2021 11:48:37; {"nome":"ENTENDER A NECESSIDADE DO CLIENTE","cor":"#97bacf"} 
+# 09/02/2021 11:48:37; {"nome":"TOP SERVICE DE PRODUTO E CONCEITO","cor":"#11a1d6"} 
+# 09/02/2021 11:48:37; {"nome":"PROJETO E PLANTA BAIXA","cor":"#5da66a"} 
+# 09/02/2021 11:48:37; {"nome":"CONTATO COM O PRODUTO","cor":"#1f8f21"} 
+# 09/02/2021 11:48:37; {"nome":"ORCAMENTO","cor":"#e4e809"} 
+# 09/02/2021 11:48:37; {"nome":"NEGOCIACAO","cor":"#f7800a"} 
+# 09/02/2021 11:48:37; {"nome":"FECHAMENTO","cor":"#c91e1e"} 
+# 09/02/2021 11:48:37; {"status":"SUCESSO","mensagem":"ok","itens":["{\"nome\":\"TRIAGEM\",\"cor\":\"#edd5e7\"}","{\"nome\":\"ENTENDER A NECESSIDADE DO CLIENTE\",\"cor\":\"#97bacf\"}","{\"nome\":\"TOP SERVICE DE PRODUTO E CONCEITO\",\"cor\":\"#11a1d6\"}","{\"nome\":\"PROJETO E PLANTA BAIXA\",\"cor\":\"#5da66a\"}","{\"nome\":\"CONTATO COM O PRODUTO\",\"cor\":\"#1f8f21\"}","{\"nome\":\"ORCAMENTO\",\"cor\":\"#e4e809\"}","{\"nome\":\"NEGOCIACAO\",\"cor\":\"#f7800a\"}","{\"nome\":\"FECHAMENTO\",\"cor\":\"#c91e1e\"}"]} 
+# 09/02/2021 11:48:37; ------------------------------   Fim   ------------------------------ 
