@@ -7,8 +7,9 @@ function logar( $nomeParam, $msgv )
 {
   date_default_timezone_set('America/Sao_Paulo');
 
-  //$arq = "../logs/$nomeParam" . '_' . date_format( date_create()  , 'YmdH') . "0000.log";
-  $arq  = "C:/Program Files/NetMake/v9-php73/wwwroot/crm/logs/" ;
+  $arq = "./logs/$nomeParam" . '_' . date_format( date_create()  , 'YmdH') . "0000.log";
+  //$arq  = "C:/Program Files/NetMake/v9-php73/wwwroot/crm/logs/" ;
+  $arq = "./logs/";
   $arq .=  date_format( date_create()  , 'Ymd_H') . "0000_";
   $arq .= $nomeParam . '.log' ;
   
