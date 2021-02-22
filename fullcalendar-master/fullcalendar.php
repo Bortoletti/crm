@@ -19,8 +19,15 @@ logar( $fileLog, '*******  INICIO  **********' );
 
 $sql = "select i.id_oportunidade
 , 'new Date( '||to_char( i.inicio_dt, 'yyyy')||', '||cast( cast( to_char( i.inicio_dt, 'mm') as integer ) -1 as varchar)||', '||to_char( i.inicio_dt, 'dd')||')' as calendar
-, i.titulo 
-from crm_oportunidade i order by i.id_oportunidade desc limit 30 ";
+, to_char( inicio_hr, 'hh24:mi')|| ' ' ||nome || ' ' || cast( inicio_hr as varchar ) as titulo 
+, 'success' as classe
+, to_char( inicio_hr, 'hh24:mi')|| ' ' ||nome || ' ' || cast( inicio_hr as varchar ) as nome
+, email
+, fone
+, ( select d.bs_cor from crm_etapa d where d.id_etapa = i.id_etapa ) as bs_cor
+from crm_oportunidade i 
+where i.id_usuario = $idUsuario
+order by to_char( i.inicio_dt, 'yyymmdd')||to_char( inicio_hr, 'hh24mi') limit 200 ";
 
 
 
@@ -36,12 +43,30 @@ try {
 
 	foreach( $rows as $r)
 	{
+
+	    $param = '{';
+	   	$param .= ' nome:"'. $r['nome'] . '"';
+		$param .= ', email:"'. $r['email'] . '"';
+		$param .= ', fone:"'. $r['fone'] . '"';
+		$param .= '}';
+
+
 		$saida .= $prefixo . '{ id: ' . $r['id_oportunidade'];
 		$saida .= ',title:"'. $r['titulo'] . '"';
 		$saida .= ',start: ' . $r['calendar'];
-		$saida .= ', className:"important"';
-		$saida .= ', id_oportunidade:'. $r['id_oportunidade'] . '}';
-        $prefixo = ', ';
+		// $saida .= ',url: "http://191.252.0.35/casadecinema/crm_oportunidade_edit/?id_oportunidade='. $r['id_oportunidade']. '"' ;
+		 // $saida .= ',url: "http://www.deltaserver.net.br:8091/casadecinema/crm_oportunidade_edit/?id_oportunidade='. $r['id_oportunidade']. '"' ;
+		$saida .= ', className:"'. $r['classe'] . '"';
+		$saida .= ', id_oportunidade:'. $r['id_oportunidade'] ;
+		$saida .= ', nome:"'. $r['nome'] . '"';
+		$saida .= ', email:"'. $r['email'] . '"';
+		$saida .= ', fone:"'. $r['fone'] . '"';
+		$saida .= ', bs_cor:"'. $r['bs_cor'] . '"';
+		$saida .= ', param: ' . $param . ' ';
+		$saida .= '}';
+
+		$prefixo = ', ';
+
 
 	}	
 	
@@ -61,7 +86,7 @@ catch(PDOException $e) {
 
 <html>
 <head>
-    <title>FullCalendar by Creative Tim </title>
+    <title>CRM - Casa de Cinema</title>
 
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -73,11 +98,32 @@ catch(PDOException $e) {
 
 <link href='assets/css/fullcalendar.css' rel='stylesheet' />
 <link href='assets/css/fullcalendar.print.css' rel='stylesheet' media='print' />
+
 <script src='assets/js/jquery-1.10.2.js' type="text/javascript"></script>
 <script src='assets/js/jquery-ui.custom.min.js' type="text/javascript"></script>
+<script type="text/javascript">
+$('.crmModal').on( "click", function() {
+	var reg = $( this ).attr('reg');
+	var obj = JSON.parse( reg );
+	app.nome = obj.nome;
+	console.log('param - ' + this.innerHTML );
+	console.log('param - ' + reg );
+	console.log( 'Form: ' + app.nome );
+    $('#myModal').modal('show'); 
+
+});
+
+</script>
 <script src='assets/js/fullcalendar.js' type="text/javascript"></script>
+<script src='bs/bootstrap/js/bootstrap.min.js' type="text/javascript"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+
 <script>
+
+
 		 var itens = [<?=$saida;?>];
+		 console.log( itens );
 		// var itens = [{ id: 666777 , title: "Bortoletti ", start: new Date(2021, 1, 1, 0, 33, 30, 0) , className: "bg-warning", id_oportunidade : 121212}];
 	$(document).ready(function() {
 	    var date = new Date();
@@ -145,6 +191,7 @@ catch(PDOException $e) {
 			allDaySlot: false,
 			selectHelper: true,
 			select: function(start, end, allDay) {
+				console.log( 'TEste');
 				var title = prompt('Event Title:');
 				if (title) {
 					calendar.fullCalendar('renderEvent',
@@ -251,13 +298,177 @@ catch(PDOException $e) {
 </style>
 </head>
 <body>
+
+
+
+
+
+<button type="button" class="btn btn-primary" 
+    data-toggle="modal" data-target="#myModal">Nova Oportunidade</button>
+
+<button id='btnNovo' reg='{"nome":"Luis"}' type="button" class="btn btn-primary crmModal" >Nova Oportunidade</button>
+<button id='btnNovo2' reg='{"nome":"Bortoletti"}' type="button" class="btn btn-primary crmModal" >Nova Oportunidade 2</button>
+
 <div id='wrap'>
 
-<div id='calendar'></div>
+<div id='calendar'>
+
+
+<!-- The Modal -->
+<div id='editOportunidade'>
+
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Modal Heading</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="card shadow mb-3">
+                <div class="card-header  bg-primary  py-3">
+                    <p class="text-white m-0 font-weight-bold">{{nome}}</p>
+                </div>
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="col">
+                            <label for="username"><strong>Descrição</strong></label>
+               <p>
+                        </div>
+                        <div class="col">
+                            <label for="username"><strong>Ultimo Historico</strong></label>
+               <p class="bg-dark text-white">
+                        </div>
+                    </div>                
+
+                    <form>
+                        <div class="form-row">
+                            <div class="col">
+                                <div class="form-group "><label for="username"><strong>Fone</strong></label>
+                                <input class="form-control" type="text" placeholder="user.name" name="username" value="xxxxxxxx" />
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="historico">
+                                    <strong>Historico</strong></label>
+                                    <textarea class="form-control" aria-label="With textarea"></textarea>
+                                    <button type="button" class="btn btn-success">Registrar</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col">
+                                <div class="form-group">
+                                <label for="email">
+                                <strong>Email Address</strong></label>
+                                <input class="form-control" type="email" placeholder="user@example.com" name="email" value="ddddddddddd" />
+                                </div>
+                            </div>
+                            <div class="col">
+
+
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+                                    </div>
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+                                        <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                    
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                          <button class="btn btn-primary btn-sm" type="submit">Atualizar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+	</div>
+
+
+
+</div>
 
 <div style='clear:both'></div>
 </div>
 
+<script>
 
+var app = new Vue({
+el: "#editOportunidade",
+data: {
+	id : 0
+	, nome: "Teste"
+	, celular: ""
+	, email: ""
+},
+methods : {
+	exibir: function( nomep )
+	{
+		this.nome = nomep 
+	}
+}
+});
+
+var formulario = {
+	nome : ''
+	, celular : ''
+	, email : ''
+	, id : 0
+}
+
+$('#btnNovo').on( "click", function() {
+
+    $('#myModal').modal('show'); 
+
+});
+
+$('.crmModal').on( "click", function() {
+	alert( 'Teste' );
+		var url = 'http://191.252.0.35/casadecinema/crm_oportunidade_edit/';
+	//window.location = url;
+	/*
+		var reg = $( this ).attr('reg');
+	var obj = JSON.parse( reg );
+	app.nome = obj.nome;
+	console.log('param - ' + this.innerHTML );
+	console.log('param - ' + reg );
+	console.log( 'Form: ' + app.nome );
+    $('#myModal').modal('show'); 
+*/
+});
+
+
+function exibir( p )
+{
+	//console.log('Parametro - ' + Object.getOwnPropertyNames( p ) );
+
+	//console.log( JSON.stringnify( p ) );
+	app.exibir( p );
+	$('#myModal').modal('show'); 
+
+}
+
+	</script>
 </body>
 </html>

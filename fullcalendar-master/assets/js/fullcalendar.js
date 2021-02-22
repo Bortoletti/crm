@@ -31,7 +31,7 @@ var defaults = {
 	weekNumberTitle: 'W',
 	
 	// editing
-	//editable: false,
+	editable: false,
 	//disableDragging: false,
 	//disableResizing: false,
 	
@@ -61,19 +61,19 @@ var defaults = {
 	// locale
 	isRTL: false,
 	firstDay: 0,
-	monthNames: ['January','February','March','April','May','June','July','August','September','October','November','December'],
-	monthNamesShort: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
-	dayNames: ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
-	dayNamesShort: ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],
+	monthNames: ['Janeiro','Fevereiro','Marco','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+	monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
+	dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sabado'],
+	dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sab'],
 	buttonText: {
 		prev: "<span class='fc-text-arrow'>&lsaquo;</span>",
 		next: "<span class='fc-text-arrow'>&rsaquo;</span>",
 		prevYear: "<span class='fc-text-arrow'>&laquo;</span>",
 		nextYear: "<span class='fc-text-arrow'>&raquo;</span>",
-		today: 'today',
-		month: 'month',
-		week: 'week',
-		day: 'day'
+		today: 'Hoje',
+		month: 'mes',
+		week: 'semana',
+		day: 'dia'
 	},
 	
 	// jquery-ui theming
@@ -368,6 +368,8 @@ function Calendar(element, options, eventSources) {
 
 
 	function renderView(inc) {
+	
+
 		if (
 			!currentView.start || // never rendered before
 			inc || date < currentView.start || date >= currentView.end // or new date range
@@ -380,6 +382,7 @@ function Calendar(element, options, eventSources) {
 
 
 	function _renderView(inc) { // assumes elementVisible
+
 		ignoreWindowResize++;
 
 		if (currentView.start) { // already been rendered?
@@ -550,7 +553,7 @@ function Calendar(element, options, eventSources) {
 
 	function updateTodayButton() {
 		var today = new Date();
-		if (today >= currentView.start && today < currentView.end) {
+		if ( today >= currentView.start && today < currentView.end ) {
 			header.disableButton('today');
 		}
 		else {
@@ -565,7 +568,7 @@ function Calendar(element, options, eventSources) {
 	
 
 	function select(start, end, allDay) {
-		currentView.select(start, end, allDay===undefined ? true : allDay);
+		currentView.select( start, end, allDay === undefined ? true : allDay );
 	}
 	
 
@@ -764,6 +767,7 @@ function Header(calendar, options) {
 	
 	
 	function renderSection(position) {
+		console.log('renderSection');
 		var e = $("<td class='fc-header-" + position + "'/>");
 		var buttonStr = options.header[position];
 		if (buttonStr) {
@@ -792,7 +796,7 @@ function Header(calendar, options) {
 						}
 						if (buttonClick) {
 							var icon = options.theme ? smartProperty(options.buttonIcons, buttonName) : null; // why are we using smartProperty here?
-							var text = smartProperty(options.buttonText, buttonName); // why are we using smartProperty here?
+							var text = smartProperty(options.buttonText, buttonName) ; // why are we using smartProperty here?
 							var button = $(
 								"<span class='fc-button fc-button-" + buttonName + " " + tm + "-state-default'>" +
 									(icon ?
@@ -2722,6 +2726,7 @@ function AgendaDayView(element, calendar) {
 	
 	// imports
 	AgendaView.call(t, element, calendar, 'agendaDay');
+
 	var opt = t.opt;
 	var renderAgenda = t.renderAgenda;
 	var skipHiddenDays = t.skipHiddenDays;
@@ -2814,6 +2819,7 @@ function AgendaView(element, calendar, viewName) {
 	
 	// imports
 	View.call(t, element, calendar, viewName);
+
 	OverlayManager.call(t);
 	SelectionManager.call(t);
 	AgendaEventRenderer.call(t);
@@ -3145,7 +3151,9 @@ function AgendaView(element, calendar, viewName) {
 			else {
 				classNames.push('fc-future');
 			}
-
+			//=================================================================
+			//                   conteudo do dia
+			//=================================================================
 			cellHTML =
 				"<td class='" + classNames.join(' ') + "'>" +
 				"<div>" +
@@ -3294,6 +3302,7 @@ function AgendaView(element, calendar, viewName) {
 	
 	
 	function slotClick(ev) {
+		
 		if (!opt('selectable')) { // if selectable, SelectionManager will worry about dayClick
 			var col = Math.min(colCnt-1, Math.floor((ev.pageX - dayTable.offset().left - axisWidth) / colWidth));
 			var date = cellToDate(0, col);
@@ -3546,7 +3555,7 @@ function AgendaView(element, calendar, viewName) {
 								start: startDate,
 								end: endDate,
 								className: ['fc-select-helper'],
-								editable: false
+								editable: true
 							},
 							rect
 						));
@@ -3959,6 +3968,7 @@ function AgendaEventRenderer() {
 		console.log('slotSegHtml');
 		var html = "<";
 		var url = event.url;
+		var url = '';
 		var skinCss = getSkinCss(event, opt);
 		var classes = ['fc-event', 'fc-event-vert'];
 		if (isEventDraggable(event)) {
@@ -3989,27 +3999,30 @@ function AgendaEventRenderer() {
 				skinCss +
 				"'" +
 			">" +
-			"<div class='fc-event-inner'>" +
-			"<div class='fc-event-time'>" +
+			"<div class='fc-event-inner crmModal '>" +
+		    "<button id='btnNovo2' reg='{" + '"nome":"'+event.title+'"'+ "}' type='" + "button' " + 'class="btn btn-primary crmModal" >Nova Oportunidade 2</button>';
+			+ "<div class='fc-event-time'>" +
 			htmlEscape(formatDates(event.start, event.end, opt('timeFormat'))) +
 			"</div>" +
 			"<div class='fc-event-title'>" +
 			htmlEscape(event.title || ' ') +
-			"</div>" +
+		    "</div>" +
 			"</div>" +
 			"<div class='fc-event-bg'></div>";
 		if (seg.isEnd && isEventResizable(event)) {
 			html +=
 				"<div class='ui-resizable-handle ui-resizable-s'>=</div>";
 		}
+
 		html +=
 			"</" + (url ? "a" : "div") + ">";
+		console.log( html );
 		return html;
 	}
 	
 	
 	function bindSlotSeg(event, eventElement, seg) {
-				console.log('bindSlotSeg');
+
 		var timeElement = eventElement.find('div.fc-event-time');
 		if (isEventDraggable(event)) {
 			draggableSlotEvent(event, eventElement, timeElement);
@@ -5140,7 +5153,7 @@ function DayEventRenderer() {
 		// do the actual rendering. Receive the intermediate "segment" data structures.
 		var segments = _renderDayEvents(
 			events,
-			false, // don't append event elements
+			true, // don't append event elements
 			true // set the heights of the rows
 		);
 
@@ -5317,11 +5330,12 @@ function DayEventRenderer() {
 	// - `segment.event` (from `buildSegmentsForEvent`)
 	// - `segment.left` (from `calculateHorizontals`)
 	function buildHTMLForSegment(segment) {
+		// editar modal
 		console.log( 'buildHTMLForSegment:' + segment.event );
 		var html = '';
 		var isRTL = opt('isRTL');
 		var event = segment.event;
-		var url = event.url;
+		var url =  event.url;
 
 		// generate the list of CSS classNames
 		var classNames = [ 'fc-event', 'fc-event-hori' ];
@@ -5347,12 +5361,12 @@ function DayEventRenderer() {
 		var skinCss = getSkinCss(event, opt);
 
 		if (url) {
-			html += "<a href='" + htmlEscape(url) + "'";
+			 html += "<a href='" + htmlEscape(url) + "'";
 		}else{
 			html += "<div";
 		}
 		html +=
-			" class='" + classNames.join(' ') + "'" +
+			" class='" + classNames.join(' ') + "   '" +
 			" style=" +
 				"'" +
 				"position:absolute;" +
@@ -5360,7 +5374,7 @@ function DayEventRenderer() {
 				skinCss +
 				"'" +
 			">" +
-			"<div class='fc-event-inner'>";
+			"<div class='fc-event-inner  "+ event.bs_cor +"  '>";
 		if (!event.allDay && segment.isStart) {
 			html +=
 				"<span class='fc-event-time'>" +
@@ -5370,23 +5384,28 @@ function DayEventRenderer() {
 				"</span>";
 		}
 		html +=
-			"<span class='fc-event-title'>" +
-			htmlEscape(event.title || '') + 
-			"</span>" +
+			"<span class='fc-event-title '>" +
+			"<b>" + htmlEscape(event.nome || '') + "</b>" + 
+			"</span> <br>"+
+			"<button class='bg-warning' onclick='"+' exibir("'+event.id+'"); '+"' type = 'button' >Editar</button > " +
+			"<button class='bg-danger' onclick='"+' exibir("'+event.id+'"); '+"' type = 'button' >Cancelar</button > " +
+			"<button class='bg-primary' onclick='"+' exibir("'+event.id+'"); '+"' type = 'button' >Ganho</button > " +
 			"</div>";
 		if (segment.isEnd && isEventResizable(event)) {
 			html +=
-				"<div class='ui-resizable-handle ui-resizable-" + (isRTL ? 'w' : 'e') + "'>" +
+				"<div class='ui-resizable-handle  ui-resizable-" + (isRTL ? 'w' : 'e') + " '>" +
 				"&nbsp;&nbsp;&nbsp;" + // makes hit area a lot better for IE6/7
-				"</div>";
+				"</div> ";
 		}
+	    //html += '<div><button type="button" class="btn btn-primary crmModal" data-toggle="modal" data-target="#myModal">Open modal</button></div>';
+	    //html += '<div><button type="button" class="btn btn-primary " exibir('+event.id_oportunidade+') reg={"nome":"'+event.id_oportunidade+'","id":"'+event.id_oportunidade+'"} >'+event.id_oportunidade+'</button></div>';
 		html += "</" + (url ? "a" : "div") + ">";
 
 		// TODO:
 		// When these elements are initially rendered, they will be briefly visibile on the screen,
 		// even though their widths/heights are not set.
 		// SOLUTION: initially set them as visibility:hidden ?
-
+		console.log( html );
 		return html;
 	}
 
